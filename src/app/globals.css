@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+* {
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.012rem;
+  text-rendering: optimizeLegibility !important;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+  transition-duration: 600ms;
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.swiper-slide {
+  width: auto !important;
+}
+
+.swiper-free-mode > .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+mux-player {
+  --controls: none;
+  pointer-events: none !important;
+  --media-object-fit: cover;
+  --media-object-position: center;
+}
+
+.page-transition {
+  opacity: 0;
+}
