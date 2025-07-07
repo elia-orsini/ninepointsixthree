@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // const allProjectsPages = allProjects.map((project) => {
   //   return {
-  //     url: `https://www.angelaricciardi.com/project/${toSlug(project.title)}`,
+  //     url: `https://www.963.com/work/${toSlug(project.title)}`,
   //     lastModified: new Date(),
   //     priority: 0.6,
   //   };
