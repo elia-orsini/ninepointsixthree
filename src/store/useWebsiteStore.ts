@@ -2,15 +2,15 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface WebsiteStore {
-  currentPage: number;
-  setCurrentPage: (currentPage: number) => void;
+  displayBigLogo: boolean;
+  setDisplayBigLogo: (displayBigLogo: boolean) => void;
 }
 
 export const useWebsiteStore = create<WebsiteStore>()(
   persist(
     (set) => ({
-      currentPage: 0,
-      setCurrentPage: (currentPage: number) => set({ currentPage }),
+      displayBigLogo: true,
+      setDisplayBigLogo: (displayBigLogo) => set({ displayBigLogo }),
     }),
     { name: "website-store" }
   )
