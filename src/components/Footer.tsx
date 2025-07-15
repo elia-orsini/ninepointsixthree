@@ -14,7 +14,7 @@ export default function Footer() {
   }
 
   return (
-    <div className="z-20 mb-[21px] flex w-full flex-row pl-[53px] pr-[20px] text-[14px]">
+    <div className="z-20 mb-[21px] mt-[400px] flex w-full flex-row pl-[53px] pr-[20px] text-[14px]">
       <Image
         alt=""
         className="absolute left-0 h-auto w-screen"

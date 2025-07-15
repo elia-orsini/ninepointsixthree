@@ -41,22 +41,9 @@ export default function RootLayout({
       <body
         className={`no-scrollbar flex flex-col overflow-x-clip bg-[#C8C0BA] antialiased ${NeueHaasUnicaW1G.className} text-[12px]`}
       >
-        <div className="absolute ml-[16px] flex h-dvh flex-col justify-between py-[21px]">
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-          <div>10</div>
-        </div>
-
         <Navbar />
 
-        <div className="h-dvh">{children}</div>
+        <div className="min-h-dvh">{children}</div>
 
         <Footer />
       </body>
