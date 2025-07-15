@@ -50,7 +50,7 @@ export default function Navbar() {
           <Link
             key={item.path}
             href={item.path}
-            // @ts-ignore
+            //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
             className={`relative z-10 rounded-[1px] py-[2px] text-white no-underline first:ml-[5px] ${i === 2 && "mr-[5px]"}`}
           >

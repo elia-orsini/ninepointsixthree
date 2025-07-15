@@ -125,17 +125,17 @@ export default async function IndexPage() {
           <p className="text-center text-[24px] leading-[24px]">FAQ</p>
 
           <p className="mt-[15px] text-left text-[16px]">
-            What's the typical timeline for brand identity development?
+            What&apos;s the typical timeline for brand identity development?
             <br />
             The entire process typically takes about 3-6 months, from onboarding and discovery to
-            positioning and identity development. It's broken down into phases, each lasting 3-4
-            weeks, with revisions in between. This is a collaborative and iterative process, so the
-            pace will depend on how quickly we receive feedback and input.
+            positioning and identity development. It&apos;s broken down into phases, each lasting
+            3-4 weeks, with revisions in between. This is a collaborative and iterative process, so
+            the pace will depend on how quickly we receive feedback and input.
             <br />
             What will my time commitment be for this?
             <br />
-            Your commitment, as well as your team's, will mainly focus on providing feedback and
-            participating in meetings and presentations. We will guide you through every step,
+            Your commitment, as well as your team&apos;s, will mainly focus on providing feedback
+            and participating in meetings and presentations. We will guide you through every step,
             ensuring that at no point will your next steps be unclear.
             <br />
             How do you handle revisions?
@@ -154,8 +154,8 @@ export default async function IndexPage() {
             <br />
             What do we need to have before we can hire you?
             <br />
-            You don't need anything to get started? just bring your excitement and anticipation to
-            build something great together!
+            You don&apos;t need anything to get started? just bring your excitement and anticipation
+            to build something great together!
             <br />
             How will design impact my sales or brand growth?
             <br />
@@ -166,14 +166,14 @@ export default async function IndexPage() {
             ultimately drive sales. When your brand looks and feels aligned with your audience? s
             needs, growth naturally follows.
             <br />
-            I'm not ready to invest in design right now. Why should I?
+            I&apos;m not ready to invest in design right now. Why should I?
             <br />
-            Design isn't just about looking good? it? s about creating clarity, building trust, and
-            making an impact. Investing in design early helps you communicate your vision clearly,
-            stand out in your space, and connect with the right audience. It sets the tone for how
-            people experience your brand, whether you? re pitching an idea, launching a product, or
-            growing your presence. Even small steps in the right direction can create long-term
-            value.
+            Design isn&apos;t just about looking good? it? s about creating clarity, building trust,
+            and making an impact. Investing in design early helps you communicate your vision
+            clearly, stand out in your space, and connect with the right audience. It sets the tone
+            for how people experience your brand, whether you? re pitching an idea, launching a
+            product, or growing your presence. Even small steps in the right direction can create
+            long-term value.
             <br />
             What does the design process involve?
             <br />
