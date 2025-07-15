@@ -27,7 +27,7 @@ export default async function IndexPage() {
             process, from the ground up to a fully realized brand.
           </p>
 
-          <div className="mt-[52px] flex flex-row gap-x-[74px]">
+          <div className="mt-[52px] flex flex-col gap-x-[74px] gap-y-[44px] sm:flex-row">
             <div className="flex flex-col gap-y-[14px]">
               <p className="text-center">Premium Positioning</p>
               <p>
