@@ -1,5 +1,6 @@
 "use client";
 
+import useWindowWidth from "@/hooks/useWindowWidth";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,6 +8,7 @@ import { useEffect, useState } from "react";
 
 export default function Footer({ data }: { data: any }) {
   const [showDesc, setShowDesc] = useState<boolean>(false);
+  const windowWidth = useWindowWidth();
   let pathname = usePathname() || "/";
 
   if (pathname.includes("/work/")) {
@@ -24,7 +26,40 @@ export default function Footer({ data }: { data: any }) {
   }, [pathname]);
 
   if (pathname === "/work" || pathname === "/")
-    return (
+    return windowWidth && windowWidth < 1024 ? (
+      <div className="z-20 mx-[20px] mb-[21px] mt-auto flex-row text-[10px]">
+        <div
+          onClick={() => setShowDesc(!showDesc)}
+          className="flex w-full flex-col backdrop-blur-[4px] hover:cursor-pointer"
+        >
+          <div className="flex flex-row justify-between bg-[#282D324D] p-[6px]">
+            <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
+
+            <input
+              className="bg-transparent placeholder:uppercase placeholder:text-black focus:outline-0"
+              placeholder="enter your email..."
+            />
+
+            <button className="bg-[#C8C0BA66] px-[6px] py-[2px] uppercase text-white">
+              submit
+            </button>
+          </div>
+        </div>
+
+        <div className="my-[4px] flex flex-row justify-between">
+          <Link href="#" className="mt-auto uppercase">
+            faq
+          </Link>
+          <a href={data.instagram || "#"} className="mt-auto uppercase">
+            instagram
+          </a>
+        </div>
+
+        <p className="mx-auto text-center opacity-50">
+          © Copyright, Terms & Conditions, Privacy Policy
+        </p>
+      </div>
+    ) : (
       <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row pl-[53px] pr-[20px] text-[14px] sm:flex">
         <div className="mb-[7px] flex w-[19vw] flex-row justify-between pr-[40px]">
           <Link href="#" className="mt-auto uppercase">
@@ -64,7 +99,7 @@ export default function Footer({ data }: { data: any }) {
         className="absolute left-0 h-auto w-screen"
         width="0"
         height="0"
-        src="/963-logo.svg"
+        src="/963-logo-wide.svg"
       />
 
       <div className="mb-[7px] flex w-[19vw] flex-row justify-between pr-[40px]">
