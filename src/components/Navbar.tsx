@@ -27,11 +27,13 @@ export default function Navbar() {
     const container = containerRef.current;
 
     if (itemRefs && itemRefs.current) {
-      Object.keys(itemRefs.current).map((key: string) =>
-        itemRefs.current[key].classList.remove("!text-white")
-      );
+      Object.keys(itemRefs.current).map((key: string) => {
+        itemRefs.current[key].classList.remove("!text-white");
+        itemRefs.current[key].classList.remove("hover:cursor-default");
+      });
     }
     el?.classList.add("!text-white");
+    el?.classList.add("hover:cursor-default");
 
     if (el && container) {
       const elRect = el.getBoundingClientRect();
@@ -46,9 +48,13 @@ export default function Navbar() {
   return (
     <div className="fixed left-1/2 z-20 mt-[21px] flex w-max -translate-x-1/2 transform flex-row gap-x-[5px] backdrop-blur-[4px]">
       <div className="flex rounded-[1px] bg-[#282D324D]">
-        <Link href={"/"} className="h-max">
-          <p className="m-auto px-[16px] py-[6px]">9.63</p>
-        </Link>
+        {pathname === "/" ? (
+          <p className="m-auto px-[16px] py-[6px] hover:cursor-default">9.63</p>
+        ) : (
+          <Link href={"/"} className="m-auto px-[16px] py-[6px]">
+            9.63
+          </Link>
+        )}
       </div>
 
       <div
