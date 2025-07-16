@@ -46,7 +46,9 @@ export default function Navbar() {
   return (
     <div className="fixed left-1/2 z-20 mt-[21px] flex w-max -translate-x-1/2 transform flex-row gap-x-[5px] backdrop-blur-[4px]">
       <div className="flex rounded-[1px] bg-[#282D324D]">
-        <p className="m-auto px-[16px] py-[6px]">9.63</p>
+        <Link href={"/"} className="h-max">
+          <p className="m-auto px-[16px] py-[6px]">9.63</p>
+        </Link>
       </div>
 
       <div
@@ -66,7 +68,7 @@ export default function Navbar() {
         ))}
 
         <motion.div
-          className="absolute bottom-[5px] top-[5px] z-0 rounded-[1px] bg-[#FFFFFF30]"
+          className={`absolute bottom-[5px] top-[5px] z-0 rounded-[1px] bg-[#FFFFFF30] ${pathname === "/" ? "opacity-0" : "opacity-100"}`}
           animate={indicatorStyle}
           transition={{
             type: "spring",

@@ -23,7 +23,7 @@ export default function Footer() {
     }
   }, [pathname]);
 
-  if (pathname === "/work")
+  if (pathname === "/work" || pathname === "/")
     return (
       <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row pl-[53px] pr-[20px] text-[14px] sm:flex">
         <div className="mb-[7px] flex w-[19vw] flex-row justify-between pr-[40px]">
