@@ -2,7 +2,7 @@ import { client } from "@/sanity/client";
 import { fetchOptions } from "@/constants/constants";
 import WorkPage from "@/components/Work/WorkPage";
 
-const IMAGES = `*[_type == "landingImages"][]{images[]}`;
+const IMAGES = `*[_type == "selectedWorks"][]{images[]}`;
 
 export default async function IndexPage() {
   const projects = await client.fetch<any[]>(IMAGES, {}, fetchOptions);

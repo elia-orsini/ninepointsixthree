@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Footer() {
+export default function Footer({ data }: { data: any }) {
   const [showDesc, setShowDesc] = useState<boolean>(false);
   let pathname = usePathname() || "/";
 
@@ -30,7 +30,7 @@ export default function Footer() {
           <Link href="#" className="mt-auto uppercase">
             faq
           </Link>
-          <a href="#" className="mt-auto uppercase">
+          <a href={data.instagram || "#"} className="mt-auto uppercase">
             instagram
           </a>
         </div>
@@ -83,13 +83,7 @@ export default function Footer() {
         <p
           className={`bg-[#282D324D] p-[8px] pb-[84px] text-black/50 ${showDesc ? "opacity-100" : "opacity-0"}`}
         >
-          9.63 is a brand consultancy founded on the belief that every business has a story to tell.
-          Our approach is fueled by a deep sense of curiosity and a passion for discovery. In
-          partnership with forward-thinking cultural and commercial brands, we help uncover their
-          purpose, identify and clarify core values, and develop a foundation for future success. By
-          leveraging tactical intuition, we create brand strategies and identity systems that engage
-          deeply with the world we live in. Ultimately, we seek to produce thoughtful solutions that
-          convey our clients’ brand essence and propel them into the forefront of modern culture.
+          {data.statement}
         </p>
 
         <div className={`flex flex-col bg-[#282D324D] p-[8px] transition-all duration-700`}>

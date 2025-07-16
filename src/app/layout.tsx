@@ -3,7 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import type { Viewport } from "next";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import FooterWrapper from "@/components/Footer/FooterWrapper";
 
 const NeueHaasUnicaW1G = localFont({ src: "./NNRektoratTrial-Light.otf" });
 
@@ -46,7 +46,7 @@ export default function RootLayout({
         <div className="min-h-dvh flex flex-col">
           {children}
 
-          <Footer />
+          <FooterWrapper />
         </div>
       </body>
     </html>
