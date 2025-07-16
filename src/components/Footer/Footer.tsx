@@ -92,6 +92,63 @@ export default function Footer({ data }: { data: any }) {
       </div>
     );
 
+  if (windowWidth && windowWidth < 1024)
+    return (
+      <div className="z-20 mx-[20px] mb-[21px] mt-auto flex-row text-[10px]">
+        <Image alt="" className="h-auto w-screen mb-[20px]" width="0" height="0" src="/963-logo.svg" />
+
+        <div
+          onClick={() => setShowDesc(!showDesc)}
+          className="flex w-full flex-col backdrop-blur-[4px] hover:cursor-pointer"
+        >
+          <p
+            className={`bg-[#282D324D] p-[8px] pb-[19px] text-black/50 ${showDesc ? "block" : "hidden"}`}
+          >
+            {data.statement}
+          </p>
+
+          <div className={`flex flex-col bg-[#282D324D] p-[8px] transition-all duration-700`}>
+            <div className="mb-[35px] flex flex-row">
+              <button className="mt-1 aspect-square h-max bg-[#282D324D] p-[10px]">
+                <div className="h-[14px] w-[14px] rounded-full bg-white"></div>
+              </button>
+
+              <p className="pl-[5vw] text-black/50">
+                By checking this box sign up for our newsletter and receive marketing emails and
+                updates on our services. You can unsubscribe at any time.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-row justify-between bg-[#282D324D] p-[6px]">
+            <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
+
+            <input
+              className="bg-transparent placeholder:uppercase placeholder:text-black focus:outline-0"
+              placeholder="enter your email..."
+            />
+
+            <button className="bg-[#C8C0BA66] px-[6px] py-[2px] uppercase text-white">
+              submit
+            </button>
+          </div>
+        </div>
+
+        <div className="my-[4px] flex flex-row justify-between">
+          <Link href="#" className="mt-auto uppercase">
+            faq
+          </Link>
+          <a href={data.instagram || "#"} className="mt-auto uppercase">
+            instagram
+          </a>
+        </div>
+
+        <p className="mx-auto text-center opacity-50">
+          © Copyright, Terms & Conditions, Privacy Policy
+        </p>
+      </div>
+    );
+
   return (
     <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row pl-[53px] pr-[20px] text-[14px] sm:flex">
       <Image
