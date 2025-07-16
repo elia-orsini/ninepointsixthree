@@ -7,7 +7,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 const navItems = [
   { path: "/work", name: "Selected" },
-  { path: "/about", name: "Info" },
+  { path: "/info", name: "Info" },
   { path: "/contact", name: "Contact" },
 ];
 
@@ -31,7 +31,7 @@ export default function Navbar() {
         itemRefs.current[key].classList.remove("!text-white")
       );
     }
-    el.classList.add("!text-white");
+    el?.classList.add("!text-white");
 
     if (el && container) {
       const elRect = el.getBoundingClientRect();
