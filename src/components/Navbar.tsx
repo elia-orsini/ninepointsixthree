@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 
 const navItems = [
-  { path: "/work", name: "work" },
-  { path: "/about", name: "about" },
-  { path: "/contact", name: "contact" },
+  { path: "/work", name: "Selected" },
+  { path: "/about", name: "Info" },
+  { path: "/contact", name: "Contact" },
 ];
 
 export default function Navbar() {
@@ -26,6 +26,13 @@ export default function Navbar() {
     const el = itemRefs.current[pathname];
     const container = containerRef.current;
 
+    if (itemRefs && itemRefs.current) {
+      Object.keys(itemRefs.current).map((key: string) =>
+        itemRefs.current[key].classList.remove("!text-white")
+      );
+    }
+    el.classList.add("!text-white");
+
     if (el && container) {
       const elRect = el.getBoundingClientRect();
       const containerRect = container.getBoundingClientRect();
@@ -37,7 +44,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <div className="fixed left-1/2 z-20 mt-[21px] flex w-max -translate-x-1/2 transform flex-row gap-x-[5px] uppercase backdrop-blur-[4px]">
+    <div className="fixed left-1/2 z-20 mt-[21px] flex w-max -translate-x-1/2 transform flex-row gap-x-[5px] backdrop-blur-[4px]">
       <div className="flex rounded-[1px] bg-[#282D324D]">
         <p className="m-auto px-[16px] py-[6px]">9.63</p>
       </div>
@@ -52,7 +59,7 @@ export default function Navbar() {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`relative z-10 rounded-[1px] py-[2px] text-white no-underline first:ml-[5px] ${i === 2 && "mr-[5px]"}`}
+            className={`relative z-10 rounded-[1px] py-[2px] text-black no-underline first:ml-[5px] ${i === 2 && "mr-[5px]"}`}
           >
             <span>{item.name}</span>
           </Link>
