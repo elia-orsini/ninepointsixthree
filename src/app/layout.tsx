@@ -5,7 +5,7 @@ import type { Viewport } from "next";
 import Navbar from "@/components/Navbar";
 import FooterWrapper from "@/components/Footer/FooterWrapper";
 
-const NeueHaasUnicaW1G = localFont({ src: "./NNRektoratTrial-Light.otf" });
+const NeueHaasUnicaW1G = localFont({ src: "./NNRektoratTrial-LightRe.otf" });
 
 export const metadata: Metadata = {
   title: "Nine Point Six Three",
