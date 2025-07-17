@@ -10,7 +10,7 @@ export default async function IndexPage() {
 
   return (
     <main className="flex w-screen flex-col font-semibold">
-      <div className="absolute ml-[16px] flex h-dvh flex-col justify-between py-[21px]">
+      <div className="absolute ml-[20px] lg:ml-[16px] flex h-dvh flex-col justify-between py-[21px]">
         <div>1</div>
         <div>2</div>
         <div>3</div>

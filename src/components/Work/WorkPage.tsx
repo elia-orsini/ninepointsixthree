@@ -4,7 +4,7 @@ export default function WorkPage({ media }: { media: any[] }) {
   console.log(media);
 
   return (
-    <div className="mx-auto py-[21px]">
+    <div className="mx-auto">
       <Slider mediaList={media} />
     </div>
   );
