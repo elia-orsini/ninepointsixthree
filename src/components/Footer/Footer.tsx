@@ -29,15 +29,17 @@ export default function Footer({ data }: { data: any }) {
     return windowWidth && windowWidth < 1024 ? (
       <div className="z-20 mx-[20px] mb-[21px] mt-auto flex-row text-[10px]">
         <div className="flex w-full flex-col backdrop-blur-[4px] hover:cursor-pointer">
-          <div className="flex flex-row justify-between bg-[#282D324D] px-[11px] py-[6px]">
+          <div className="flex flex-row justify-between rounded-[3px] bg-[#282D324D] px-[11px] py-[6px]">
             <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
             <input
-              className="ml-auto bg-transparent placeholder:uppercase placeholder:text-black focus:outline-0"
-              placeholder="enter your email..."
+              className="ml-auto bg-transparent placeholder:text-black focus:outline-0"
+              placeholder="Enter your email..."
             />
 
-            <button className="uppercase text-white">submit</button>
+            <button className="rounded-[1px] bg-[#C8C0BA66] px-[9px] py-[2px] text-white">
+              Submit
+            </button>
           </div>
         </div>
 
@@ -45,9 +47,7 @@ export default function Footer({ data }: { data: any }) {
           <Link href="#" className="mt-auto uppercase">
             faq
           </Link>
-          <a href={data.instagram || "#"} className="mt-auto uppercase">
-            instagram
-          </a>
+          <span className="mt-auto">9pt63</span>
         </div>
 
         <p className="mx-auto text-center opacity-50">
@@ -56,25 +56,27 @@ export default function Footer({ data }: { data: any }) {
       </div>
     ) : (
       <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row pl-[53px] pr-[20px] text-[14px] sm:flex">
-        <div className="mb-[7px] flex w-[19vw] flex-row justify-between pr-[40px]">
+        <div className="mb-[7px] flex w-[19vw] flex-row justify-between">
+          <span></span>
           <Link href="#" className="mt-auto uppercase">
             faq
           </Link>
-          <a href={data.instagram || "#"} className="mt-auto uppercase">
-            instagram
-          </a>
+          <span className="mt-auto">9pt63</span>
+          <span></span>
         </div>
 
         <div className="flex w-[43vw] flex-col backdrop-blur-[4px] hover:cursor-pointer">
-          <div className="flex flex-row justify-between bg-[#282D324D] p-[8px] py-[5px]">
+          <div className="flex flex-row justify-between rounded-[3px] bg-[#282D324D] p-[8px] py-[5px]">
             <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
             <input
-              className="ml-auto w-[200px] bg-transparent placeholder:uppercase placeholder:text-black focus:outline-0"
-              placeholder="enter your email..."
+              className="ml-auto w-[200px] bg-transparent placeholder:text-black focus:outline-0"
+              placeholder="Enter your email..."
             />
 
-            <button className="uppercase text-white">submit</button>
+            <button className="rounded-[1px] bg-[#C8C0BA66] px-[9px] py-[2px] text-white">
+              Submit
+            </button>
           </div>
         </div>
 
@@ -104,7 +106,7 @@ export default function Footer({ data }: { data: any }) {
         <div className="flex w-full flex-col backdrop-blur-[4px] hover:cursor-pointer">
           <p
             onClick={() => setShowDesc(!showDesc)}
-            className={`bg-[#282D324D] p-[8px] pb-[19px] text-black/50 ${showDesc ? "block" : "hidden"}`}
+            className={`bg-[#282D324D] p-[8px] pb-[19px] leading-[12px] text-black/50 ${showDesc ? "block" : "hidden"}`}
           >
             {data.statement}
           </p>
@@ -118,7 +120,7 @@ export default function Footer({ data }: { data: any }) {
                 <div className="h-[8px] w-[8px] rounded-full bg-white"></div>
               </button>
 
-              <p className="pl-[5vw] text-black/50">
+              <p className="pl-[5vw] leading-[12px] text-black/50">
                 By checking this box sign up for our newsletter and receive marketing emails and
                 updates on our services. You can unsubscribe at any time.
               </p>
@@ -129,11 +131,13 @@ export default function Footer({ data }: { data: any }) {
             <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
             <input
-              className="ml-auto bg-transparent placeholder:uppercase placeholder:text-black focus:outline-0"
-              placeholder="enter your email..."
+              className="ml-auto bg-transparent placeholder:text-black focus:outline-0"
+              placeholder="Enter your email..."
             />
 
-            <button className="uppercase text-white">submit</button>
+            <button className="rounded-[1px] bg-[#C8C0BA66] px-[9px] py-[2px] text-white">
+              Submit
+            </button>
           </div>
         </div>
 
@@ -141,9 +145,7 @@ export default function Footer({ data }: { data: any }) {
           <Link href="#" className="mt-auto uppercase">
             faq
           </Link>
-          <a href={data.instagram || "#"} className="mt-auto uppercase">
-            instagram
-          </a>
+          <span className="mt-auto">9pt63</span>
         </div>
 
         <p className="mx-auto text-center opacity-50">
@@ -162,19 +164,19 @@ export default function Footer({ data }: { data: any }) {
         src="/963-logo-wide.svg"
       />
 
-      <div className="mb-[7px] flex w-[19vw] flex-row justify-between pr-[40px]">
+      <div className="mb-[7px] flex w-[19vw] flex-row justify-between">
+        <span></span>
         <Link href="#" className="mt-auto uppercase">
           faq
         </Link>
-        <a href="#" className="mt-auto uppercase">
-          instagram
-        </a>
+        <span className="mt-auto">9pt63</span>
+        <span></span>
       </div>
 
       <div className="flex w-[43vw] flex-col backdrop-blur-[4px] hover:cursor-pointer">
         <p
           onClick={() => setShowDesc(!showDesc)}
-          className={`bg-[#282D324D] px-[8px] pb-[84px] pt-[8px] text-black/50 ${showDesc ? "opacity-100" : "opacity-0"}`}
+          className={`bg-[#282D324D] px-[8px] pb-[84px] pt-[8px] leading-[16px] text-black/50 ${showDesc ? "opacity-100" : "opacity-0"}`}
         >
           {data.statement}
         </p>
@@ -188,7 +190,7 @@ export default function Footer({ data }: { data: any }) {
               <div className="h-[14px] w-[14px] rounded-full bg-white"></div>
             </button>
 
-            <p className="pl-[5vw] text-black/50">
+            <p className="pl-[5vw] leading-[16px] text-black/50">
               By checking this box sign up for our newsletter and receive marketing emails and
               updates on our services. You can unsubscribe at any time.
             </p>
@@ -199,11 +201,13 @@ export default function Footer({ data }: { data: any }) {
           <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
           <input
-            className="ml-auto w-[200px] bg-transparent placeholder:uppercase placeholder:text-black focus:outline-0"
-            placeholder="enter your email..."
+            className="ml-auto w-[200px] bg-transparent placeholder:text-black focus:outline-0"
+            placeholder="Enter your email..."
           />
 
-          <button className="uppercase text-white">submit</button>
+          <button className="rounded-[1px] bg-[#C8C0BA66] px-[9px] py-[2px] text-white">
+            Submit
+          </button>
         </div>
       </div>
 

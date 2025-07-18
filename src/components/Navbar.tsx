@@ -47,7 +47,7 @@ export default function Navbar() {
 
   return (
     <div className="fixed left-1/2 z-20 mt-[21px] flex w-max -translate-x-1/2 transform flex-row gap-x-[5px] backdrop-blur-[4px]">
-      <div className="flex rounded-[1px] bg-[#282D324D]">
+      <div className="flex rounded-[3px] bg-[#282D324D]">
         {pathname === "/" ? (
           <p className="m-auto px-[16px] py-[6px] hover:cursor-default">9.63</p>
         ) : (
@@ -59,7 +59,7 @@ export default function Navbar() {
 
       <div
         ref={containerRef}
-        className="relative flex w-max flex-row gap-x-[20px] rounded-[1px] bg-[#282D324D] p-[5px]"
+        className="relative flex w-max flex-row gap-x-[20px] rounded-[3px] bg-[#282D324D] p-[5px]"
       >
         {navItems.map((item, i) => (
           <Link
@@ -67,7 +67,7 @@ export default function Navbar() {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`relative z-10 rounded-[1px] py-[2px] text-black no-underline first:ml-[5px] ${i === 2 && "mr-[5px]"}`}
+            className={`relative z-10 py-[2px] text-black no-underline first:ml-[5px] ${i === 2 && "mr-[5px]"}`}
           >
             <span>{item.name}</span>
           </Link>
