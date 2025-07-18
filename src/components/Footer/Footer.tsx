@@ -161,6 +161,7 @@ export default function Footer({ data }: { data: any }) {
         className="absolute left-0 h-auto w-screen"
         width="0"
         height="0"
+        sizes="800px"
         src="/963-logo-wide.svg"
       />
 
