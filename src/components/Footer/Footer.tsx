@@ -106,7 +106,7 @@ export default function Footer({ data }: { data: any }) {
         <div className="flex w-full flex-col backdrop-blur-[4px] hover:cursor-pointer">
           <p
             onClick={() => setShowDesc(!showDesc)}
-            className={`bg-[#282D324D] p-[8px] pb-[19px] leading-[12px] text-black/50 ${showDesc ? "block" : "hidden"}`}
+            className={`rounded-t-[3px] bg-[#282D324D] p-[8px] pb-[19px] leading-[12px] text-black/50 ${showDesc ? "block" : "hidden"}`}
           >
             {data.statement}
           </p>
@@ -127,7 +127,7 @@ export default function Footer({ data }: { data: any }) {
             </div>
           </div>
 
-          <div className="flex flex-row bg-[#282D324D] px-[11px] py-[6px]">
+          <div className="flex flex-row rounded-b-[3px] bg-[#282D324D] px-[11px] py-[6px]">
             <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
             <input
@@ -176,14 +176,14 @@ export default function Footer({ data }: { data: any }) {
       <div className="flex w-[43vw] flex-col backdrop-blur-[4px] hover:cursor-pointer">
         <p
           onClick={() => setShowDesc(!showDesc)}
-          className={`bg-[#282D324D] px-[8px] pb-[84px] pt-[8px] leading-[16px] text-black/50 ${showDesc ? "opacity-100" : "opacity-0"}`}
+          className={`rounded-t-[3px] bg-[#282D324D] px-[8px] pb-[84px] pt-[8px] leading-[16px] text-black/50 ${showDesc ? "opacity-100" : "opacity-0"}`}
         >
           {data.statement}
         </p>
 
         <div
           onClick={() => setShowDesc(!showDesc)}
-          className={`flex flex-col bg-[#282D324D] p-[8px] pb-[101px] transition-all duration-700`}
+          className={`flex flex-col bg-[#282D324D] p-[8px] pb-[101px] ${showDesc ? "rounded-t-[0px]" : "rounded-t-[3px]"}`}
         >
           <div className="flex flex-row">
             <button className="mt-1 aspect-square h-max bg-[#282D324D] p-[10px]">
@@ -197,7 +197,7 @@ export default function Footer({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="flex flex-row bg-[#282D324D] p-[8px] py-[5px]">
+        <div className="flex flex-row rounded-b-[3px] bg-[#282D324D] p-[8px] py-[5px]">
           <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
           <input
