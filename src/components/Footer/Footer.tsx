@@ -29,7 +29,7 @@ export default function Footer({ data }: { data: any }) {
     return windowWidth && windowWidth < 1024 ? (
       <div className="z-20 mx-[20px] mb-[21px] mt-auto flex-row text-[10px]">
         <div className="flex w-full flex-col backdrop-blur-[4px] hover:cursor-pointer">
-          <div className="flex flex-row justify-between rounded-[3px] bg-[#282D324D] px-[11px] py-[6px]">
+          <div className="flex flex-row justify-between rounded-[3px] bg-[#282D324D] py-[6px] pl-[8px] pr-[5px]">
             <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
             <input
@@ -66,7 +66,7 @@ export default function Footer({ data }: { data: any }) {
         </div>
 
         <div className="flex w-[43vw] flex-col backdrop-blur-[4px] hover:cursor-pointer">
-          <div className="flex flex-row justify-between rounded-[3px] bg-[#282D324D] p-[8px] py-[5px]">
+          <div className="flex flex-row justify-between rounded-[3px] bg-[#282D324D] py-[5px] pl-[8px] pr-[5px]">
             <p className="my-auto text-nowrap text-white">Subscribe to our newsletter</p>
 
             <input
