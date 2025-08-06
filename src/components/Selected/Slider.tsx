@@ -114,7 +114,7 @@ export default function Slider({
 
       <Swiper
         slidesPerView={"auto"}
-        spaceBetween={0}
+        spaceBetween={2}
         virtualTranslate={false}
         loop={false}
         modules={[FreeMode]}
@@ -154,7 +154,7 @@ export default function Slider({
             }}
           >
             <div
-              className={`relative h-[80px] w-[100px] overflow-hidden transition-opacity duration-300 hover:cursor-pointer hover:opacity-100 sm:w-[6.66vw] ${i === centerIndex % mediaList.length ? "opacity-100" : "opacity-100"} `}
+              className={`relative h-[80px] w-[100px] overflow-hidden rounded-[12px] transition-opacity duration-300 hover:cursor-pointer hover:opacity-100 sm:w-[6.66vw] ${i === centerIndex % mediaList.length ? "opacity-100" : "opacity-100"} `}
             >
               <Image
                 src={urlFor(media.asset).height(400).url()}

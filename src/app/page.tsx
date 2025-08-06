@@ -5,5 +5,6 @@ export default async function IndexPage() {
     <main className="flex h-full w-screen flex-col bg-red-200 font-semibold">
       <Landing />
     </main>
+    
   );
 }

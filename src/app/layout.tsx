@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#C8C0BA] antialiased ${NeueHaasUnicaW1G.className} text-[12px]`}
+        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#F9F9F9] antialiased ${NeueHaasUnicaW1G.className} text-[12px]`}
       >
         <Navbar />
 
