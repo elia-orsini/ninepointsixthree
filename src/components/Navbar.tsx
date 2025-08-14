@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { motion } from "framer-motion";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const navItems = [
   { path: "/selected", name: "Selected" },
@@ -11,7 +10,8 @@ const navItems = [
   { path: "/audio", name: "Audio" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ information }: { information: any }) {
+  const [showInfo, setShowInfo] = useState(false);
   let pathname = usePathname() || "/";
 
   if (pathname.includes("/selected/")) {
@@ -20,11 +20,9 @@ export default function Navbar() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<any>({});
-  // const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
   useLayoutEffect(() => {
     const el = itemRefs.current[pathname];
-    // const container = containerRef.current;
 
     if (itemRefs && itemRefs.current) {
       Object.keys(itemRefs.current).map((key: string) => {
@@ -36,28 +34,76 @@ export default function Navbar() {
     el?.classList.add("hover:cursor-default");
     el?.classList.add("!text-white");
     el?.classList.add("!bg-[#6C6C6CB2]");
-
-    // if (el && container) {
-    //   const elRect = el.getBoundingClientRect();
-    //   const containerRect = container.getBoundingClientRect();
-    //   setIndicatorStyle({
-    //     left: elRect.left - containerRect.left - 5,
-    //     width: elRect.width + 10,
-    //   });
-    // }
   }, [pathname]);
 
   return (
     <div className="fixed z-20 mt-[34px] flex w-screen flex-row justify-between gap-x-[5px] px-[60px]">
-      <div className="flex rounded-[12px] bg-[#DBDBDBB2] text-[#6C6C6C] backdrop-blur-[5px]">
-        {pathname === "/" ? (
-          <p className="m-auto px-[16px] py-[6px] hover:cursor-default">9.63</p>
-        ) : (
-          <Link href={"/"} className="m-auto px-[16px] py-[6px]">
-            9.63
-          </Link>
-        )}
+      <div className="flex rounded-[24px] bg-[#DBDBDBB2] text-black backdrop-blur-[5px]">
+        <button
+          onClick={() => setShowInfo(true)}
+          className={`m-auto px-[24px] py-[10px] ${showInfo ? "hidden" : "block"}`}
+        >
+          9.63
+        </button>
       </div>
+
+      {showInfo && (
+        <div className="absolute w-[40vw] rounded-[24px] bg-[#6C6C6CB2] p-[18px] text-white backdrop-blur-[22px]">
+          <button onClick={() => setShowInfo(false)}>
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.01367 8.76337L5.01462 4.76242M5.01462 4.76242L9.01556 0.761475M5.01462 4.76242L1.01367 0.761475M5.01462 4.76242L9.01556 8.76337"
+                stroke="#BCBCBC"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <div className="p-[18px] leading-[10px]">
+            <p className="leading-[14px]">{information.statement}</p>
+
+            <div className="mt-[18px]">
+              <div className="grid grid-cols-3 text-[7.5px] text-[#BCBCBC]">
+                <p>Service</p>
+                <p>Clients</p>
+                <p>Press</p>
+              </div>
+              <div className="mt-[6px] grid grid-cols-3">
+                <div className="flex flex-col">
+                  <p>Brand Positioning</p>
+                  <p>Brand Architecture</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Justsmile</p>
+                  <p>Talome</p>
+                  <p>Aymeric</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Visuelle</p>
+                  <p>Visual Journal</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-[18px]">
+              <div className="grid grid-cols-3 text-[7.5px] text-[#BCBCBC]">
+                <p>Email</p>
+                <p>Socials</p>
+              </div>
+              <div className="mt-[6px] grid grid-cols-3">
+                <p>studio@</p>
+                <p>9pt63</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div ref={containerRef} className="relative flex w-max flex-row gap-x-[6px] rounded-[3px]">
         {navItems.map((item) => (
@@ -71,16 +117,6 @@ export default function Navbar() {
             <span>{item.name}</span>
           </Link>
         ))}
-
-        {/* <motion.div
-          className={`absolute bottom-[5px] top-[5px] z-0 rounded-[1px] bg-[#FFFFFF30] ${pathname === "/" ? "opacity-0" : "opacity-100"}`}
-          animate={indicatorStyle}
-          transition={{
-            type: "spring",
-            stiffness: 130,
-            damping: 20,
-          }}
-        /> */}
       </div>
     </div>
   );
