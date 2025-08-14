@@ -36,13 +36,14 @@ interface JournalPost {
 }
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function JournalPostPage({ params }: PageProps) {
-  const post: JournalPost = await client.fetch(journalPostQuery, { slug: params.slug });
+  const { slug } = await params;
+  const post: JournalPost = await client.fetch(journalPostQuery, { slug });
 
   if (!post) {
     notFound();
