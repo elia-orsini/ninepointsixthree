@@ -9,7 +9,7 @@ export default async function IndexPage() {
   const media = projects[0].images.flat();
 
   return (
-    <main className="flex w-screen flex-col font-semibold">
+    <main className="flex w-screen flex-col">
       <SelectedPage media={media} />
     </main>
   );

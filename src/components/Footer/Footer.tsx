@@ -2,16 +2,7 @@
 
 export default function Footer() {
   return (
-    <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row pl-[53px] pr-[20px] text-[14px] sm:flex">
-      {/* <div className="mb-[7px] flex w-[19vw] flex-row justify-between">
-        <span></span>
-        <Link href="#" className="mt-auto uppercase">
-          faq
-        </Link>
-        <span className="mt-auto">9pt63</span>
-        <span></span>
-      </div> */}
-
+    <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row text-[14px] sm:flex">
       <div className="mx-auto flex w-[375px] flex-col backdrop-blur-[22px] hover:cursor-pointer">
         <div className="flex flex-row justify-between rounded-[24px] bg-[#DBDBDB99] px-[25px] py-[15px] text-[10px] text-[#A6A6A6]">
           <input
@@ -25,8 +16,6 @@ export default function Footer() {
           </button>
         </div>
       </div>
-
-      {/* <p className="mb-[7px] ml-auto mt-auto">© Copyright, Terms & Conditions, Privacy Policy</p> */}
     </div>
   );
 }

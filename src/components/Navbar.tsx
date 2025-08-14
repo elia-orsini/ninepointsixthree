@@ -48,8 +48,8 @@ export default function Navbar({ information }: { information: any }) {
       </div>
 
       {showInfo && (
-        <div className="absolute w-[40vw] rounded-[24px] bg-[#6C6C6CB2] p-[18px] text-white backdrop-blur-[22px]">
-          <button onClick={() => setShowInfo(false)}>
+        <div className="absolute w-[40vw] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-white backdrop-blur-[22px]">
+          <button onClick={() => setShowInfo(false)} className="px-[18px] pb-[8px] pt-[18px]">
             <svg
               width="10"
               height="10"
@@ -65,7 +65,7 @@ export default function Navbar({ information }: { information: any }) {
               />
             </svg>
           </button>
-          <div className="p-[18px] leading-[10px]">
+          <div className="px-[36px] pb-[18px] leading-[10px]">
             <p className="leading-[14px]">{information.statement}</p>
 
             <div className="mt-[18px]">
@@ -112,7 +112,7 @@ export default function Navbar({ information }: { information: any }) {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`relative z-10 rounded-[13px] bg-[#DBDBDBB2] px-[14px] py-[10px] text-[#6C6C6C] no-underline backdrop-blur-[5px] first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
+            className={`relative z-10 rounded-[13px] bg-[#DBDBDBB2] px-[14px] py-[10px] text-black no-underline backdrop-blur-[5px] first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
           >
             <span>{item.name}</span>
           </Link>

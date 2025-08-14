@@ -7,7 +7,31 @@ import FooterWrapper from "@/components/Footer/FooterWrapper";
 import { fetchOptions } from "@/constants/constants";
 import { client } from "@/sanity/client";
 
-const NeueHaasUnicaW1G = localFont({ src: "./NNRektoratTrial-LightRe.otf" });
+const Helvetica = localFont({
+  src: [
+    {
+      path: "./HelveticaNeue-Roman.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./HelveticaNeueBold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./HelveticaNeueItalic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./HelveticaNeueBoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-times-new-roman",
+});
 
 export const metadata: Metadata = {
   title: "Nine Point Six Three",
@@ -45,7 +69,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#F9F9F9] antialiased ${NeueHaasUnicaW1G.className} text-[10px]`}
+        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#F9F9F9] text-[10px] ${Helvetica.className} antialiased`}
       >
         <Navbar information={information[0]} />
 

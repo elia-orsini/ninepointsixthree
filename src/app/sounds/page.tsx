@@ -1,3 +1,3 @@
 export default async function IndexPage() {
-  return <main className="flex w-screen flex-col font-semibold"></main>;
+  return <main className="flex w-screen flex-col"></main>;
 }
