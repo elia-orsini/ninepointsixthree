@@ -49,7 +49,7 @@ export default function Footer() {
               <p className="my-auto whitespace-nowrap">Thank you for subscribing</p>
             ) : (
               <input
-                className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:outline-0 ${
+                className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:outline-none ${
                   isFocused || isSubmitted ? "w-[600px]" : "w-[200px]"
                 }`}
                 placeholder={isFocused ? "Enter your email address here..." : "Sign up for updates"}
