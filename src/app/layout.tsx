@@ -69,7 +69,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#F9F9F9] text-[10px] ${Helvetica.className} antialiased`}
+        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#FAF9F6] text-[10px] ${Helvetica.className} antialiased`}
       >
         <Navbar information={information[0]} />
 
