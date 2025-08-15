@@ -41,26 +41,30 @@ export default function Footer() {
       <div className="mx-auto flex w-[375px] flex-col backdrop-blur-[22px] hover:cursor-pointer">
         <form onSubmit={handleSubmit} className="flex">
           <div
-            className={`mx-auto flex flex-row justify-between rounded-[24px] bg-[#DBDBDB99] px-[25px] py-[15px] text-[10px] text-[#A6A6A6] transition-all duration-500 ease-in-out ${
-              isFocused ? "w-[350px]" : "w-[250px]"
+            className={`mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} px-[30px] py-[15px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
+              isFocused || isSubmitted ? "w-[350px]" : "w-[250px]"
             }`}
           >
-            <input
-              className={`bg-transparent transition-all duration-500 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:outline-0 ${
-                isFocused ? "w-[380px]" : "w-[200px]"
-              }`}
-              placeholder="Enter your email address here..."
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
+            {isSubmitted ? (
+              <p className="my-auto whitespace-nowrap">Thank you for subscribing</p>
+            ) : (
+              <input
+                className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:outline-0 ${
+                  isFocused || isSubmitted ? "w-[600px]" : "w-[200px]"
+                }`}
+                placeholder={isFocused ? "Enter your email address here..." : "Sign up for updates"}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+            )}
 
             <button
               type="submit"
-              className="flex flex-row gap-x-[5px] rounded-[1px] px-[9px] py-[2px] text-black transition-all duration-500 ease-in-out"
+              className={`flex flex-row gap-x-[5px] rounded-[1px] px-[9px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-black"} transition-all duration-500 ease-in-out`}
             >
               <div
-                className={`my-auto h-[14px] w-[14px] rounded-full transition-all duration-500 ease-in-out ${
-                  isSubmitted ? "bg-green-500" : "bg-[#FF1500]"
+                className={`my-auto h-[10px] w-[10px] rounded-full transition-all duration-500 ease-in-out ${
+                  isSubmitted ? "bg-[#3CFF00]" : "bg-[#FF1500]"
                 }`}
               />
               <span>{isSubmitted ? "Subscribed" : "Subscribe"}</span>

@@ -112,7 +112,7 @@ export default function Navbar({ information }: { information: any }) {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-black no-underline backdrop-blur-[5px] transition-colors duration-500 first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
+            className={`relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-black no-underline backdrop-blur-[5px] transition-colors duration-500 first:ml-[5px] hover:bg-[#BCBCBCB2] hover:text-black`}
           >
             <span>{item.name}</span>
           </TransitionLink>
