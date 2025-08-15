@@ -7,7 +7,7 @@ import { TransitionLink } from "./TransitionLink";
 const navItems = [
   { path: "/", name: "Selected" },
   { path: "/journal", name: "Journal" },
-  { path: "/audio", name: "Audio" },
+  { path: "/sounds", name: "Sounds" },
 ];
 
 export default function Navbar({ information }: { information: any }) {
