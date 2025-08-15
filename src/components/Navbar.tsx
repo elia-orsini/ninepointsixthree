@@ -37,7 +37,7 @@ export default function Navbar({ information, email }: { information: any; email
   }, []);
 
   return (
-    <div className="fixed z-20 mt-[34px] flex w-screen flex-row justify-between gap-x-[5px] px-[60px]">
+    <div className="fixed z-40 mt-[34px] flex w-screen flex-row justify-between gap-x-[5px] px-[24px] sm:px-[60px]">
       {showInfo ? (
         <div></div>
       ) : (
@@ -52,7 +52,7 @@ export default function Navbar({ information, email }: { information: any; email
       )}
 
       <div
-        className={`absolute left-0 top-0 ml-[60px] w-[40vw] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out ${
+        className={`absolute left-0 top-0 ml-[24px] sm:ml-[60px] z-50 w-[330px] sm:w-[670px] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out ${
           showInfo
             ? "visible translate-y-0 opacity-100"
             : "pointer-events-none invisible -translate-y-2 opacity-0"

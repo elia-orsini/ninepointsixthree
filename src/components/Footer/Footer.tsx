@@ -36,7 +36,7 @@ export default function Footer() {
 
   return (
     <div
-      className={`${pathname.includes("journal") ? "mb-[24px]" : "fixed bottom-[24px]"} z-20 mt-auto hidden w-full flex-row text-[14px] sm:flex`}
+      className={`${pathname.includes("journal") ? "mb-[24px]" : "fixed bottom-[24px]"} z-20 mt-auto flex w-full flex-row text-[14px]`}
     >
       <div className="mx-auto flex w-[375px] flex-col hover:cursor-pointer">
         <form onSubmit={handleSubmit} className="flex">
