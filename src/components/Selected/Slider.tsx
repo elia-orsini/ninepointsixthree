@@ -16,6 +16,7 @@ export default function Slider({
   showThumbnails?: boolean;
 }) {
   const swiperRef = useRef<any>(null);
+  const isAnimating = useRef(false);
 
   // Calculate scale based on viewport position
   const calculateViewportScale = (element: Element) => {
@@ -32,7 +33,7 @@ export default function Slider({
     // Maximum distance where scaling should occur (half viewport height)
     const maxDistance = viewportHeight / 5;
 
-    // Calculate scale factor: 1.0 at edges, 1.25 at cente
+    // Calculate scale factor: 1.0 at edges, 1.25 at center
     const scaleFactor = 1.0 + 0.5 * (1 - distanceFromCenter / maxDistance);
 
     // Clamp scale between 1.0 and 1.25
@@ -41,9 +42,9 @@ export default function Slider({
 
   // Update scales for all slides
   const updateSlideScales = useCallback(() => {
-    if (!swiperRef.current) return;
+    if (!swiperRef.current || isAnimating.current) return;
 
-    const slides = swiperRef.current.el.querySelectorAll(".slide");
+    const slides = swiperRef.current.el?.querySelectorAll(".slide");
 
     slides.forEach((slide: Element) => {
       const scale = calculateViewportScale(slide);
@@ -75,11 +76,39 @@ export default function Slider({
     };
   }, [updateSlideScales]);
 
-  const handleSlideChangeTransitionStart = () => {
-    setTimeout(() => {
-      swiperRef.current.animating = false;
-    }, 0);
+  // Handle loop transition
+  const handleTransitionStart = () => {
+    isAnimating.current = true;
   };
+
+  const handleTransitionEnd = () => {
+    isAnimating.current = false;
+    updateSlideScales();
+  };
+
+  // Clone items for seamless looping
+  const duplicatedItems = [
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+    ...mediaList,
+  ];
 
   return (
     <div className="h-full w-screen">
@@ -87,30 +116,45 @@ export default function Slider({
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={2}
-          virtualTranslate={false}
-          loop={false}
+          loop={true}
+          loopAdditionalSlides={mediaList.length * 10} // Ensure enough slides for smooth looping
           modules={[FreeMode]}
-          freeMode={true}
+          freeMode={{
+            enabled: true,
+            sticky: true,
+          }}
           allowTouchMove={false}
-          onSlideChangeTransitionStart={handleSlideChangeTransitionStart}
-          className="no-scrollbar !overflow-scroll"
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          onTransitionStart={handleTransitionStart}
+          onTransitionEnd={handleTransitionEnd}
+          className="no-scrollbar w-screen !overflow-scroll"
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            // Start auto-scrolling
+            const autoScroll = () => {
+              if (!swiper.destroyed) {
+                swiper.slideNext(1000); // Adjust speed as needed
+                setTimeout(autoScroll, 3000); // Adjust delay as needed
+              }
+            };
+            setTimeout(autoScroll, 3000);
+          }}
           direction="vertical"
+          speed={1000} // Adjust animation speed
         >
-          {mediaList.map((media) => {
+          {duplicatedItems.map((media, index) => {
+            const uniqueKey = `${media._key}-${index}`; // Create unique key for duplicated items
             return (
               <SwiperSlide
-                key={media._key}
-                data-key={media._key}
+                key={uniqueKey}
+                data-key={uniqueKey}
                 className="mt-auto flex !h-max select-none"
-                onClick={() => {}}
               >
                 <div
                   className={`slide relative mx-auto overflow-hidden rounded-[12px] transition-all duration-300 ease-out`}
                   style={{
                     transformOrigin: "center center",
                     height: "138px",
-                    width: `110px`,
+                    width: "110px",
                   }}
                 >
                   <Image
