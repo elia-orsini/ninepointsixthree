@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #f8f8f8;
+  --foreground: #373737;
 }
 
 ::selection {
-  background: #000000;
-  color: #ffffff;
+  background: #373737;
+  color: #f8f8f8;
 }
 
 * {

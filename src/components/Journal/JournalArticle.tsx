@@ -41,7 +41,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
           </time>
         </div>
 
-        <h2 className="text-[13.4px] leading-[13.4px] text-black">{post.title}</h2>
+        <h2 className="text-[13.4px] leading-[13.4px] text-[#373737]">{post.title}</h2>
       </header>
 
       {post.excerpt && (
@@ -49,7 +49,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
       )}
 
       {post.body && (
-        <div className="text-[10px] leading-[10px] text-black">
+        <div className="text-[10px] leading-[10px] text-[#373737]">
           <PortableText
             value={post.body}
             components={{

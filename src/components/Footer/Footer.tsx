@@ -60,7 +60,7 @@ export default function Footer() {
 
             <button
               type="submit"
-              className={`flex flex-row gap-x-[5px] rounded-[1px] px-[9px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-black"} transition-all duration-500 ease-in-out`}
+              className={`flex flex-row gap-x-[5px] rounded-[1px] px-[9px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#373737]"} transition-all duration-500 ease-in-out`}
             >
               <div
                 className={`my-auto h-[10px] w-[10px] rounded-full transition-all duration-500 ease-in-out ${
