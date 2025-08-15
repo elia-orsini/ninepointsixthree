@@ -2,80 +2,78 @@
 
 import Image from "next/image";
 import { urlFor } from "@/sanity/urlFor";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
-import gsap from "gsap";
-
-import { useGSAP } from "@gsap/react";
 
 export default function Slider({
   mediaList,
   showThumbnails = true,
-  initialImageIndex,
 }: {
   mediaList: any[];
   showThumbnails?: boolean;
-  initialImageIndex?: string | string[] | undefined;
 }) {
-  const [centerIndex, setCenterIndex] = useState<number>(0);
   const swiperRef = useRef<any>(null);
 
-  const animationRef = useRef<GSAPTimeline | null>(null);
+  // Calculate scale based on viewport position
+  const calculateViewportScale = (element: Element) => {
+    const rect = element.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
 
-  useEffect(() => {
-    if (initialImageIndex && swiperRef.current) {
-      const i = parseInt(initialImageIndex as string) % mediaList.length;
+    // Calculate the center point of the element relative to viewport
+    const elementCenter = rect.top + rect.height / 2;
+    const viewportCenter = viewportHeight / 2;
 
-      if (i) {
-        swiperRef.current.slideToLoop(i - 1);
-        setCenterIndex(swiperRef.current.realIndex);
-      } else {
-        console.warn("No slide found with the provided initialImageIndex");
-      }
-    }
-  }, [mediaList, initialImageIndex]);
+    // Calculate distance from viewport center (0 = perfectly centered)
+    const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
 
-  useGSAP(
-    () => {
-      if (animationRef.current) {
-        animationRef.current.kill();
-      }
+    // Maximum distance where scaling should occur (half viewport height)
+    const maxDistance = viewportHeight / 5;
 
-      animationRef.current = gsap.timeline({
-        defaults: { ease: "power3.inOut" },
-      });
+    // Calculate scale factor: 1.0 at edges, 1.25 at cente
+    const scaleFactor = 1.0 + 0.5 * (1 - distanceFromCenter / maxDistance);
 
-      animationRef.current
-        .to("#center", {
-          opacity: 0,
-          duration: 0.2,
-        })
-        .call(() => {
-          setCenterIndex(swiperRef.current.realIndex);
-        })
-        .to(
-          "#center",
-          {
-            opacity: 1,
-            duration: 0.4,
-            delay: 0.3,
-          },
-          ">"
-        );
-    },
-    { dependencies: [swiperRef.current?.realIndex] }
-  );
+    // Clamp scale between 1.0 and 1.25
+    return Math.max(1.0, Math.min(1.5, scaleFactor));
+  };
 
-  useEffect(() => {
-    return () => {
-      if (animationRef.current) {
-        animationRef.current.kill();
-      }
-    };
+  // Update scales for all slides
+  const updateSlideScales = useCallback(() => {
+    if (!swiperRef.current) return;
+
+    const slides = swiperRef.current.el.querySelectorAll(".slide");
+
+    slides.forEach((slide: Element) => {
+      const scale = calculateViewportScale(slide);
+      // @ts-expect-error idk
+      slide.style.width = `${110 * scale}px`;
+      // @ts-expect-error idk
+      slide.style.height = `${138 * scale}px`;
+    });
   }, []);
+
+  // Set up scroll and resize listeners
+  useEffect(() => {
+    const handleScroll = () => {
+      requestAnimationFrame(updateSlideScales);
+    };
+
+    const handleResize = () => {
+      requestAnimationFrame(updateSlideScales);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    setTimeout(updateSlideScales, 500);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [updateSlideScales]);
 
   const handleSlideChangeTransitionStart = () => {
     setTimeout(() => {
@@ -84,43 +82,52 @@ export default function Slider({
   };
 
   return (
-    <div className={`flex h-full w-full ${!showThumbnails && "opacity-0"}`}>
-      <Swiper
-        slidesPerView={"auto"}
-        spaceBetween={2}
-        virtualTranslate={false}
-        loop={false}
-        modules={[FreeMode]}
-        freeMode={true}
-        allowTouchMove={false}
-        onSlideChangeTransitionStart={handleSlideChangeTransitionStart}
-        className="no-scrollbar !overflow-scroll"
-        onSwiper={(swiper) => (swiperRef.current = swiper)}
-        direction="vertical"
-      >
-        {mediaList.map((media, i) => (
-          <SwiperSlide
-            key={media._key}
-            data-key={media._key}
-            className="mt-auto !h-max select-none"
-            onClick={() => {}}
-          >
-            <div
-              className={`relative h-[80px] w-[100px] overflow-hidden rounded-[12px] transition-opacity duration-300 sm:w-[6.66vw] ${i === centerIndex % mediaList.length ? "opacity-100" : "opacity-100"} `}
-            >
-              <Image
-                src={urlFor(media.asset).height(400).url()}
-                fill
-                style={{ objectFit: "cover" }}
-                alt=""
-                sizes="200px"
-                placeholder="blur"
-                blurDataURL={urlFor(media.asset).width(10).blur(25).url()}
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="h-full w-screen">
+      <div className={`flex h-full w-full ${!showThumbnails && "opacity-0"}`}>
+        <Swiper
+          slidesPerView={"auto"}
+          spaceBetween={2}
+          virtualTranslate={false}
+          loop={false}
+          modules={[FreeMode]}
+          freeMode={true}
+          allowTouchMove={false}
+          onSlideChangeTransitionStart={handleSlideChangeTransitionStart}
+          className="no-scrollbar !overflow-scroll"
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          direction="vertical"
+        >
+          {mediaList.map((media, i) => {
+            return (
+              <SwiperSlide
+                key={media._key}
+                data-key={media._key}
+                className="mt-auto flex !h-max select-none"
+                onClick={() => {}}
+              >
+                <div
+                  className={`slide relative mx-auto overflow-hidden rounded-[12px] transition-all duration-300 ease-out`}
+                  style={{
+                    transformOrigin: "center center",
+                    height: "138px",
+                    width: `110px`,
+                  }}
+                >
+                  <Image
+                    src={urlFor(media.asset).height(400).url()}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    alt=""
+                    sizes="200px"
+                    placeholder="blur"
+                    blurDataURL={urlFor(media.asset).width(10).blur(25).url()}
+                  />
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
     </div>
   );
 }

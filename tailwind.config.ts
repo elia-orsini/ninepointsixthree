@@ -30,8 +30,16 @@ export default {
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
         emailWidgetUp: {
-          "0%": { transform: "translateY(100px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+          "0%": {
+            transform: "translateY(100px)",
+            opacity: "0",
+            backdropFilter: "blur(0px) opacity(0)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+            backdropFilter: "blur(22px) opacity(1)",
+          },
         },
       },
       animation: {

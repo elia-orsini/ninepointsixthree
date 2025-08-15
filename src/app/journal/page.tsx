@@ -66,12 +66,6 @@ export default async function JournalPage() {
         {posts.map((post) => (
           <JournalArticle key={post._id} post={post} />
         ))}
-
-        {posts.length === 0 && (
-          <div className="rounded-[24px] bg-[#D2D2D2B2] p-[36px] text-center">
-            <p className="text-[10px] text-[#989898]">No journal posts found.</p>
-          </div>
-        )}
       </div>
     </main>
   );

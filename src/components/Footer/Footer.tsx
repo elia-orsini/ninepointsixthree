@@ -36,12 +36,12 @@ export default function Footer() {
 
   return (
     <div
-      className={`${shouldAnimate ? "animate-emailWidgetUp" : ""} z-20 mb-[21px] mt-auto hidden w-full flex-row text-[14px] sm:flex`}
+      className={`${pathname.includes("journal") ? "mb-[24px]" : "fixed bottom-[24px]"} z-20 mt-auto hidden w-full flex-row text-[14px] sm:flex`}
     >
-      <div className="mx-auto flex w-[375px] flex-col backdrop-blur-[22px] hover:cursor-pointer">
+      <div className="mx-auto flex w-[375px] flex-col hover:cursor-pointer">
         <form onSubmit={handleSubmit} className="flex">
           <div
-            className={`mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} px-[30px] py-[15px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
+            className={`${shouldAnimate ? "animate-emailWidgetUp" : ""} mx-auto flex flex-row justify-between rounded-[24px] backdrop-blur-[22px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} px-[30px] py-[15px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
               isFocused || isSubmitted ? "w-[350px]" : "w-[250px]"
             }`}
           >
