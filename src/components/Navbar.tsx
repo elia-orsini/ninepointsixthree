@@ -5,18 +5,14 @@ import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, useState } from "react";
 
 const navItems = [
-  { path: "/selected", name: "Selected" },
+  { path: "/", name: "Selected" },
   { path: "/journal", name: "Journal" },
   { path: "/audio", name: "Audio" },
 ];
 
 export default function Navbar({ information }: { information: any }) {
   const [showInfo, setShowInfo] = useState(false);
-  let pathname = usePathname() || "/";
-
-  if (pathname.includes("/selected/")) {
-    pathname = "/selected";
-  }
+  const pathname = usePathname() || "/";
 
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<any>({});
@@ -112,7 +108,7 @@ export default function Navbar({ information }: { information: any }) {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`relative z-10 rounded-[13px] bg-[#DBDBDBB2] px-[14px] py-[10px] text-black no-underline backdrop-blur-[5px] first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
+            className={`relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-black no-underline backdrop-blur-[5px] first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
           >
             <span>{item.name}</span>
           </Link>

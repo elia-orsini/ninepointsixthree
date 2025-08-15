@@ -20,16 +20,13 @@ export default function Slider({
   showThumbnails?: boolean;
   initialImageIndex?: string | string[] | undefined;
 }) {
-  const [loading, setLoading] = useState(false);
   const [centerIndex, setCenterIndex] = useState<number>(0);
-  const [showMain, setShowMain] = useState<boolean>(false);
   const swiperRef = useRef<any>(null);
 
   const animationRef = useRef<GSAPTimeline | null>(null);
 
   useEffect(() => {
     if (initialImageIndex && swiperRef.current) {
-      setLoading(true);
       const i = parseInt(initialImageIndex as string) % mediaList.length;
 
       if (i) {
@@ -38,7 +35,6 @@ export default function Slider({
       } else {
         console.warn("No slide found with the provided initialImageIndex");
       }
-      setLoading(false);
     }
   }, [mediaList, initialImageIndex]);
 
@@ -56,9 +52,6 @@ export default function Slider({
         .to("#center", {
           opacity: 0,
           duration: 0.2,
-          onComplete: () => {
-            setLoading(true);
-          },
         })
         .call(() => {
           setCenterIndex(swiperRef.current.realIndex);
@@ -69,9 +62,6 @@ export default function Slider({
             opacity: 1,
             duration: 0.4,
             delay: 0.3,
-            onStart: () => {
-              setLoading(false);
-            },
           },
           ">"
         );
@@ -95,23 +85,6 @@ export default function Slider({
 
   return (
     <div className={`flex h-full w-full ${!showThumbnails && "opacity-0"}`}>
-      <div id="center" className="absolute top-0 ml-[133px] flex h-screen select-none">
-        {centerIndex !== undefined && !loading && (
-          <>
-            <Image
-              src={urlFor(mediaList[centerIndex % mediaList.length])
-                .height(800)
-                .url()}
-              alt=""
-              width={"0"}
-              height={"0"}
-              sizes="500px"
-              className={`my-auto h-auto w-[40vw] transition-opacity duration-500 ${showMain ? "opacity-100" : "opacity-0"}`}
-            />
-          </>
-        )}
-      </div>
-
       <Swiper
         slidesPerView={"auto"}
         spaceBetween={2}
@@ -123,7 +96,6 @@ export default function Slider({
         onSlideChangeTransitionStart={handleSlideChangeTransitionStart}
         className="no-scrollbar !overflow-scroll"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        // centeredSlides={true}
         direction="vertical"
       >
         {mediaList.map((media, i) => (
@@ -131,30 +103,10 @@ export default function Slider({
             key={media._key}
             data-key={media._key}
             className="mt-auto !h-max select-none"
-            onMouseEnter={() => {
-              setShowMain(true);
-              if (swiperRef.current) {
-                setCenterIndex(i);
-              }
-            }}
-            onMouseLeave={() => setShowMain(false)}
-            onClick={() => {
-              //   if (swiperRef.current) {
-              // swiperRef.current.slideTo(i);
-              // const wheelEvent = new WheelEvent("wheel", {
-              //   deltaY: 1,
-              //   bubbles: true,
-              // });
-              // setTimeout(() => {
-              //   window.dispatchEvent(wheelEvent);
-              //   window.dispatchEvent(wheelEvent);
-              //   window.dispatchEvent(wheelEvent);
-              // }, 250);
-              //   }
-            }}
+            onClick={() => {}}
           >
             <div
-              className={`relative h-[80px] w-[100px] overflow-hidden rounded-[12px] transition-opacity duration-300 hover:cursor-pointer hover:opacity-100 sm:w-[6.66vw] ${i === centerIndex % mediaList.length ? "opacity-100" : "opacity-100"} `}
+              className={`relative h-[80px] w-[100px] overflow-hidden rounded-[12px] transition-opacity duration-300 sm:w-[6.66vw] ${i === centerIndex % mediaList.length ? "opacity-100" : "opacity-100"} `}
             >
               <Image
                 src={urlFor(media.asset).height(400).url()}
