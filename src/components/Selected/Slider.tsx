@@ -97,7 +97,7 @@ export default function Slider({
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           direction="vertical"
         >
-          {mediaList.map((media, i) => {
+          {mediaList.map((media) => {
             return (
               <SwiperSlide
                 key={media._key}
