@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { TransitionLink } from "./TransitionLink";
 
 const navItems = [
   { path: "/", name: "Selected" },
@@ -31,6 +32,10 @@ export default function Navbar({ information }: { information: any }) {
     el?.classList.add("!text-white");
     el?.classList.add("!bg-[#6C6C6CB2]");
   }, [pathname]);
+
+  useEffect(() => {
+    document.querySelector(".main-content")?.classList.add("loaded");
+  }, []);
 
   return (
     <div className="fixed z-20 mt-[34px] flex w-screen flex-row justify-between gap-x-[5px] px-[60px]">
@@ -103,15 +108,15 @@ export default function Navbar({ information }: { information: any }) {
 
       <div ref={containerRef} className="relative flex w-max flex-row gap-x-[6px] rounded-[3px]">
         {navItems.map((item) => (
-          <Link
+          <TransitionLink
             key={item.path}
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-black no-underline backdrop-blur-[5px] first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
+            className={`relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-black no-underline backdrop-blur-[5px] transition-colors duration-500 first:ml-[5px] hover:bg-[#DBDBDB99] hover:text-black`}
           >
             <span>{item.name}</span>
-          </Link>
+          </TransitionLink>
         ))}
       </div>
     </div>

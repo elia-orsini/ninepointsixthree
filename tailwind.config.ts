@@ -20,6 +20,20 @@ export default {
         "16": "repeat(16, minmax(0, 1fr))",
         "19": "repeat(19, minmax(0, 1fr))",
       },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeUp: {
+          "0%": { transform: "translateY(50px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
+        fadeUp: "fadeUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
+      },
     },
   },
   plugins: [],

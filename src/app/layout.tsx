@@ -73,7 +73,7 @@ export default async function RootLayout({
       >
         <Navbar information={information[0]} />
 
-        <div className="flex min-h-dvh flex-col">
+        <div className="main-content flex min-h-dvh flex-col">
           {children}
 
           <FooterWrapper />

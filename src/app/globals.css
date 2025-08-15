@@ -59,5 +59,16 @@ mux-player {
 }
 
 .page-transition {
+  opacity: 0 !important;
+}
+
+.main-content {
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+  transition-duration: 400ms;
   opacity: 0;
+}
+
+.main-content.loaded {
+  opacity: 1;
 }
