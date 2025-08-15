@@ -29,10 +29,15 @@ export default {
           "0%": { transform: "translateY(50px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
+        emailWidgetUp: {
+          "0%": { transform: "translateY(100px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
       },
       animation: {
         fadeIn: "fadeIn 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
         fadeUp: "fadeUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
+        emailWidgetUp: "emailWidgetUp 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
       },
     },
   },

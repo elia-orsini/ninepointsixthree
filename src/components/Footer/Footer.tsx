@@ -1,8 +1,26 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
 export default function Footer() {
+  const pathname = usePathname();
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    setShouldAnimate(true);
+
+    const timer = setTimeout(() => {
+      setShouldAnimate(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   return (
-    <div className="z-20 mb-[21px] mt-auto hidden w-full flex-row text-[14px] sm:flex">
+    <div
+      className={`${shouldAnimate ? "animate-emailWidgetUp" : ""} z-20 mb-[21px] mt-auto hidden w-full flex-row text-[14px] sm:flex`}
+    >
       <div className="mx-auto flex w-[375px] flex-col backdrop-blur-[22px] hover:cursor-pointer">
         <div className="flex flex-row justify-between rounded-[24px] bg-[#DBDBDB99] px-[25px] py-[15px] text-[10px] text-[#A6A6A6]">
           <input
