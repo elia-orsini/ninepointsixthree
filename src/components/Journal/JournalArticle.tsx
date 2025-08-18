@@ -22,10 +22,8 @@ interface JournalArticleProps {
 }
 
 export default function JournalArticle({ post }: JournalArticleProps) {
-  console.log(post);
-
   return (
-    <article className="rounded-[24px] bg-[#D2D2D2B2] p-[36px]">
+    <article className="rounded-[24px] bg-[#D2D2D2B2] px-[36px] pb-[20px] pt-[36px]">
       <header className="mb-[15px]">
         <div className="mb-[10px] flex flex-row gap-x-[18px]">
           <p className="text-[7.5px] leading-[7.5px] text-[#989898]">{post.series}</p>
@@ -58,10 +56,10 @@ export default function JournalArticle({ post }: JournalArticleProps) {
               },
               list: {
                 bullet: ({ children }) => (
-                  <ul className="mb-6 list-inside list-disc space-y-2">{children}</ul>
+                  <ul className="list-inside list-disc space-y-2">{children}</ul>
                 ),
                 number: ({ children }) => (
-                  <ol className="mb-6 list-inside list-decimal space-y-2">{children}</ol>
+                  <ol className="list-inside list-decimal space-y-2">{children}</ol>
                 ),
               },
               listItem: ({ children }) => <li className="text-gray-700">{children}</li>,
@@ -83,7 +81,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
                   const aspectRatio = value.metadata?.dimensions.aspectRatio || 0.75;
 
                   return (
-                    <div className="my-[18px]">
+                    <div className="mb-[14px]">
                       <div className="relative w-full" style={{ aspectRatio: aspectRatio }}>
                         <Image
                           src={imageUrl}

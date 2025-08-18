@@ -52,7 +52,7 @@ export default function Navbar({ information, email }: { information: any; email
       )}
 
       <div
-        className={`absolute left-0 top-0 ml-[24px] sm:ml-[60px] z-50 w-[330px] sm:w-[670px] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out ${
+        className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
           showInfo
             ? "visible translate-y-0 opacity-100"
             : "pointer-events-none invisible -translate-y-2 opacity-0"

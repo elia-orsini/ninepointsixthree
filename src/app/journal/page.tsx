@@ -62,7 +62,7 @@ export default async function JournalPage() {
       <div className="fixed bottom-0 z-10 h-screen w-screen backdrop-blur-[64px]" />
 
       {/* Articles */}
-      <div className="relative z-20 mx-auto mb-[57px] mt-[90px] sm:mt-[36px] w-[290px] sm:w-[490px] animate-fadeUp space-y-[24px]">
+      <div className="relative z-20 mx-auto mb-[57px] mt-[90px] w-[calc(100vw-48px)] animate-fadeUp space-y-[12px] sm:mt-[36px] sm:w-[490px]">
         {posts.map((post) => (
           <JournalArticle key={post._id} post={post} />
         ))}
