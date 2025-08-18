@@ -77,7 +77,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
               },
               types: {
                 image: ({ value }: any) => {
-                  const imageUrl = urlFor(value).url();
+                  const imageUrl = urlFor(value).height(1000).url();
                   const aspectRatio = value.metadata?.dimensions.aspectRatio || 0.75;
 
                   return (

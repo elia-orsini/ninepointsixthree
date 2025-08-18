@@ -152,11 +152,11 @@ export default function Slider({
                   }}
                 >
                   <Image
-                    src={urlFor(media.asset).height(400).url()}
+                    src={urlFor(media.asset).height(700).url()}
                     fill
                     style={{ objectFit: "cover" }}
                     alt=""
-                    sizes="200px"
+                    sizes="700px"
                     placeholder="blur"
                     blurDataURL={media.metadata?.lqip}
                     onLoad={() => handleImageLoad(media._key)}
