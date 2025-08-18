@@ -116,6 +116,11 @@ export default function Navbar({ information, email }: { information: any; email
         </div>
       </div>
 
+      <div
+        onClick={() => setShowInfo(false)}
+        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[22px]`}
+      ></div>
+
       <div ref={containerRef} className="relative flex w-max flex-row gap-x-[6px] rounded-[3px]">
         {navItems.map((item) => (
           <TransitionLink

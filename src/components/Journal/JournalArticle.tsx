@@ -43,11 +43,11 @@ export default function JournalArticle({ post }: JournalArticleProps) {
       </header>
 
       {post.excerpt && (
-        <p className="mb-[15px] text-[10px] leading-[10px] text-[#989898]">{post.excerpt}</p>
+        <p className="mb-[15px] text-[10px] leading-[12px] text-[#989898]">{post.excerpt}</p>
       )}
 
       {post.body && (
-        <div className="text-[10px] leading-[10px] text-[#373737]">
+        <div className="text-[10px] leading-[12px] text-[#373737]">
           <PortableText
             value={post.body}
             components={{
