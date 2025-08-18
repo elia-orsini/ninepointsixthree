@@ -38,7 +38,7 @@ export const TransitionLink = ({ children, href, ...props }: TransitionLinkProps
     body?.classList.add("page-transition");
     transitioningRef.current = true;
 
-    await sleep(400); // allow exit animation
+    await sleep(300); // allow exit animation
     router.push(href);
   };
 

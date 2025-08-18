@@ -1,14 +1,17 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Footer() {
   const pathname = usePathname();
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
 
+  // Route change animation
   useEffect(() => {
     setShouldAnimate(true);
 
@@ -18,6 +21,50 @@ export default function Footer() {
 
     return () => clearTimeout(timer);
   }, [pathname]);
+
+  // Reset animation state when pathname changes
+  useEffect(() => {
+    setHasAnimated(false);
+  }, [pathname]);
+
+  // Scroll-triggered animation for pages where footer is at bottom
+  useEffect(() => {
+    if (pathname.includes("journal") || pathname.includes("sounds")) {
+      const handleScroll = () => {
+        if (hasAnimated || !footerRef.current) return;
+
+        const rect = footerRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Check if footer is visible in viewport (with some tolerance)
+        const isVisible = rect.top <= viewportHeight && rect.bottom >= viewportHeight;
+
+        if (isVisible) {
+          setShouldAnimate(true);
+          setHasAnimated(true);
+
+          const timer = setTimeout(() => {
+            setShouldAnimate(false);
+          }, 1500);
+
+          return () => clearTimeout(timer);
+        }
+      };
+
+      // Add scroll listener
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      // Check initial visibility after a short delay to ensure DOM is ready
+      const initialCheck = setTimeout(() => {
+        handleScroll();
+      }, 500);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        clearTimeout(initialCheck);
+      };
+    }
+  }, [pathname, hasAnimated]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -36,6 +83,7 @@ export default function Footer() {
 
   return (
     <div
+      ref={footerRef}
       className={`${pathname.includes("journal") ? "mb-[24px]" : "fixed bottom-[24px]"} z-20 mt-auto flex w-full flex-row text-[14px]`}
     >
       <div className="mx-auto flex w-[375px] flex-col hover:cursor-pointer">

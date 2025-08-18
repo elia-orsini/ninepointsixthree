@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { urlFor } from "@/sanity/urlFor";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +17,12 @@ export default function Slider({
 }) {
   const swiperRef = useRef<any>(null);
   const isAnimating = useRef(false);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+  // Handle image load
+  const handleImageLoad = (imageKey: string) => {
+    setLoadedImages(prev => new Set(prev).add(imageKey));
+  };
 
   // Calculate scale based on viewport position
   const calculateViewportScale = (element: Element) => {
@@ -68,7 +74,8 @@ export default function Slider({
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
 
-    setTimeout(updateSlideScales, 500);
+    // Initial update
+    setTimeout(updateSlideScales, 100);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -86,23 +93,8 @@ export default function Slider({
     updateSlideScales();
   };
 
-  // Clone items for seamless looping
+  // Clone items for seamless looping (reduced for better performance)
   const duplicatedItems = [
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
     ...mediaList,
     ...mediaList,
     ...mediaList,
@@ -117,7 +109,7 @@ export default function Slider({
           slidesPerView={"auto"}
           spaceBetween={2}
           loop={true}
-          loopAdditionalSlides={mediaList.length * 10} // Ensure enough slides for smooth looping
+          loopAdditionalSlides={mediaList.length * 5}
           modules={[FreeMode]}
           freeMode={{
             enabled: true,
@@ -132,17 +124,19 @@ export default function Slider({
             // Start auto-scrolling
             const autoScroll = () => {
               if (!swiper.destroyed) {
-                swiper.slideNext(1000); // Adjust speed as needed
-                setTimeout(autoScroll, 3000); // Adjust delay as needed
+                swiper.slideNext(1000);
+                setTimeout(autoScroll, 3000);
               }
             };
             setTimeout(autoScroll, 3000);
           }}
           direction="vertical"
-          speed={1000} // Adjust animation speed
+          speed={1000}
         >
           {duplicatedItems.map((media, index) => {
-            const uniqueKey = `${media._key}-${index}`; // Create unique key for duplicated items
+            const uniqueKey = `${media._key}-${index}`;
+            const isImageLoaded = loadedImages.has(media._key);
+            
             return (
               <SwiperSlide
                 key={uniqueKey}
@@ -164,7 +158,13 @@ export default function Slider({
                     alt=""
                     sizes="200px"
                     placeholder="blur"
-                    blurDataURL={urlFor(media.asset).width(10).blur(25).url()}
+                    blurDataURL={media.metadata?.lqip}
+                    onLoad={() => handleImageLoad(media._key)}
+                    className={`transition-opacity duration-300 ${
+                      isImageLoaded ? "opacity-100" : "opacity-90"
+                    }`}
+                    loading={index < 10 ? "eager" : "lazy"}
+                    priority={index < 5}
                   />
                 </div>
               </SwiperSlide>
