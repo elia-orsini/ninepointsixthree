@@ -52,7 +52,9 @@ export default function Footer() {
                 className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:outline-none ${
                   isFocused || isSubmitted ? "w-[600px]" : "w-[200px]"
                 }`}
-                placeholder={isFocused ? "Enter your email address here..." : "Join the mailing list"}
+                placeholder={
+                  isFocused ? "Enter your email address here..." : "Join the mailing list"
+                }
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -60,7 +62,7 @@ export default function Footer() {
 
             <button
               type="submit"
-              className={`my-auto flex flex-row gap-x-[5px] rounded-[1px] px-[9px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#373737]"} transition-all duration-500 ease-in-out`}
+              className={`my-auto flex flex-row gap-x-[5px] rounded-[1px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#373737]"} transition-all duration-500 ease-in-out`}
             >
               <div
                 className={`my-auto h-[10px] w-[10px] rounded-full transition-all duration-500 ease-in-out ${
