@@ -4,5 +4,5 @@ import imageUrlBuilder from "@sanity/image-url";
 const builder = imageUrlBuilder(client);
 
 export function urlFor(source: string) {
-  return builder.image(source).quality(50).auto("format");
+  return builder.image(source).quality(70).auto("format");
 }
