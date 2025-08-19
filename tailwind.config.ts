@@ -26,7 +26,7 @@ export default {
           "100%": { opacity: "1" },
         },
         fadeUp: {
-          "0%": { transform: "translateY(50px)", opacity: "0" },
+          "0%": { transform: "translateY(20px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
         emailWidgetUp: {
@@ -44,7 +44,7 @@ export default {
       },
       animation: {
         fadeIn: "fadeIn 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
-        fadeUp: "fadeUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
+        fadeUp: "fadeUp 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
         emailWidgetUp: "emailWidgetUp 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
       },
     },

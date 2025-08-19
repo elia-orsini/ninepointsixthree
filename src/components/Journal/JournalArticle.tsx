@@ -62,7 +62,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
                   <ol className="list-inside list-decimal space-y-2">{children}</ol>
                 ),
               },
-              listItem: ({ children }) => <li className="text-gray-700">{children}</li>,
+              listItem: ({ children }) => <li className="">{children}</li>,
               marks: {
                 link: ({ value, children }: any) => (
                   <a

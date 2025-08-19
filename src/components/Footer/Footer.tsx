@@ -120,6 +120,7 @@ export default function Footer() {
         setIsSubmitted(false);
       }
     } catch (error) {
+      console.log(error);
       setMessage("Network error. Please try again.");
       setIsSubmitted(false);
     } finally {
