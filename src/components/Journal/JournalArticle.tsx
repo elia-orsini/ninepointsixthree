@@ -23,12 +23,12 @@ interface JournalArticleProps {
 
 export default function JournalArticle({ post }: JournalArticleProps) {
   return (
-    <article className="rounded-[24px] bg-[#D2D2D2B2] px-[36px] pb-[20px] pt-[36px]">
-      <header className="mb-[15px]">
-        <div className="mb-[10px] flex flex-row gap-x-[18px]">
-          <p className="text-[7.5px] leading-[7.5px] text-[#989898]">{post.series}</p>
+    <article className="rounded-[24px] bg-[#D2D2D2B2] px-[36px] pb-[20px] pt-[32px]">
+      <header className="mb-[13px]">
+        <div className="mb-[7px] flex flex-row gap-x-[18px]">
+          <p className="text-[7.5px] leading-[9.5px] text-[#989898]">{post.series}</p>
 
-          <time className="text-[7.5px] leading-[7.5px] text-[#989898]">
+          <time className="text-[7.5px] leading-[9.5px] text-[#989898]">
             {new Date(post.publishedAt)
               .toLocaleDateString("en-US", {
                 year: "2-digit",
@@ -39,11 +39,11 @@ export default function JournalArticle({ post }: JournalArticleProps) {
           </time>
         </div>
 
-        <h2 className="text-[13.4px] leading-[13.4px] text-[#373737]">{post.title}</h2>
+        <h2 className="text-[13.4px] leading-[15.4px] text-[#373737]">{post.title}</h2>
       </header>
 
       {post.excerpt && (
-        <p className="mb-[15px] text-[10px] leading-[12px] text-[#989898]">{post.excerpt}</p>
+        <p className="mb-[19px] text-[10px] leading-[12px] text-[#989898]">{post.excerpt}</p>
       )}
 
       {post.body && (
@@ -52,7 +52,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
             value={post.body}
             components={{
               block: {
-                normal: ({ children }) => <p className="mb-[15px]">{children}</p>,
+                normal: ({ children }) => <p className="mb-[14px]">{children}</p>,
               },
               list: {
                 bullet: ({ children }) => (
@@ -96,7 +96,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
                         />
                       </div>
                       {value.caption && (
-                        <p className="mt-[12px] text-left text-[7.5px] text-[#989898]">
+                        <p className="mt-[12px] text-left text-[7.5px] leading-[9.5px] text-[#989898]">
                           {value.caption}
                         </p>
                       )}
