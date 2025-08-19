@@ -9,6 +9,9 @@ export default function Footer() {
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
 
   // Route change animation
@@ -66,20 +69,63 @@ export default function Footer() {
     }
   }, [pathname, hasAnimated]);
 
+  // Auto-dismiss message after 3 seconds
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage("");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   const handleFocus = () => {
     setIsFocused(true);
     setIsSubmitted(false);
+    setMessage("");
   };
 
   const handleBlur = () => {
     setIsFocused(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setIsSubmitted(true);
-    setIsFocused(false);
-  };
+
+    if (!email.trim() || !email.includes("@")) {
+      setMessage("Please enter a valid email address");
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setEmail("");
+        setIsSubmitted(true);
+        setIsFocused(false);
+      } else {
+        console.log(data.error);
+        setMessage("Something went wrong");
+        setIsSubmitted(false);
+      }
+    } catch (error) {
+      setMessage("Network error. Please try again.");
+      setIsSubmitted(false);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div
@@ -87,7 +133,7 @@ export default function Footer() {
       className={`${pathname.includes("journal") ? "mb-[24px]" : "fixed bottom-[24px]"} z-20 mt-auto flex w-full flex-row text-[14px]`}
     >
       <div className="mx-auto flex w-[375px] flex-col hover:cursor-pointer">
-        <form onSubmit={handleSubmit} className="flex">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <div
             className={`${shouldAnimate ? "animate-emailWidgetUp" : ""} mx-auto flex flex-row justify-between rounded-[24px] backdrop-blur-[22px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
               isFocused || isSubmitted ? "w-[350px]" : "w-[250px]"
@@ -97,30 +143,41 @@ export default function Footer() {
               <p className="my-auto whitespace-nowrap">Thank you for subscribing</p>
             ) : (
               <input
-                className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:outline-none ${
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:border-none focus:shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0 ${
                   isFocused || isSubmitted ? "w-[600px]" : "w-[200px]"
                 }`}
+                style={{ outline: "none", boxShadow: "none" }}
                 placeholder={
                   isFocused ? "Enter your email address here..." : "Join the mailing list"
                 }
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                disabled={isLoading}
               />
             )}
 
             <button
               type="submit"
-              className={`my-auto flex flex-row gap-x-[5px] rounded-[1px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#373737]"} transition-all duration-500 ease-in-out`}
+              disabled={isLoading}
+              className={`my-auto flex flex-row gap-x-[5px] rounded-[1px] py-[2px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#373737]"} transition-all duration-500 ease-in-out ${isLoading ? "cursor-not-allowed opacity-50" : ""}`}
             >
               <div
                 className={`my-auto h-[10px] w-[10px] rounded-full transition-all duration-500 ease-in-out ${
                   isSubmitted ? "bg-[#3CFF00]" : "bg-[#FF1500]"
                 }`}
               />
-              <span>{isSubmitted ? "Subscribed" : "Subscribe"}</span>
+              <span>{isLoading ? "Subscribing..." : isSubmitted ? "Subscribed" : "Subscribe"}</span>
             </button>
           </div>
         </form>
+      </div>
+
+      <div
+        className={`absolute left-1/2 mx-auto mb-2 -translate-x-1/2 transform text-center text-[10px] text-red-600 transition-all duration-500 ease-in-out ${message ? "visible -translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-2 opacity-0"}`}
+      >
+        {message}
       </div>
     </div>
   );

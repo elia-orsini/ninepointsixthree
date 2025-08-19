@@ -96,7 +96,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
                         />
                       </div>
                       {value.caption && (
-                        <p className="mt-[12px] text-left text-[7.5px] leading-[9.5px] text-[#989898]">
+                        <p className="mt-[4px] text-left text-[7.5px] leading-[9.5px] text-[#989898]">
                           {value.caption}
                         </p>
                       )}
