@@ -1,24 +1,45 @@
 import type { MetadataRoute } from "next";
+import { client } from "@/sanity/client";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // const ALL_PROJECTS = `*[_type == "project"]|order(publishedAt desc)[0...60]{title}`;
-  // const allProjects = await client.fetch<IProject[]>(ALL_PROJECTS, {}, fetchOptions);
+  // Query all journal slugs
+  const journalQuery = `*[_type == "journal"] | order(publishedAt desc) {
+    slug,
+    publishedAt
+  }`;
 
-  // const allProjectsPages = allProjects.map((project) => {
-  //   return {
-  //     url: `https://www.963.com/work/${toSlug(project.title)}`,
-  //     lastModified: new Date(),
-  //     priority: 0.6,
-  //   };
-  // });
+  const journalPosts = await client.fetch(journalQuery);
+
+  const journalPages = journalPosts.map(
+    (post: { slug: { current: string }; publishedAt: string }) => {
+      return {
+        url: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
+        lastModified: new Date(post.publishedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+      };
+    }
+  );
 
   return [
     {
-      url: "https://ninepointsixthree.co/",
+      url: "https://www.ninepointsixthree.co/",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
     },
-    // ...allProjectsPages,
+    {
+      url: "https://www.ninepointsixthree.co/journal",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: "https://www.ninepointsixthree.co/sounds",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    ...journalPages,
   ];
 }
