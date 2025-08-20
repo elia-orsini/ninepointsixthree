@@ -10,7 +10,7 @@ const navItems = [
   { path: "/sounds", name: "Sounds" },
 ];
 
-export default function Navbar({ information, email }: { information: any; email: string }) {
+export default function Navbar({ information }: { information: any }) {
   const [showInfo, setShowInfo] = useState(false);
   const pathname = usePathname() || "/";
 
@@ -53,9 +53,7 @@ export default function Navbar({ information, email }: { information: any; email
 
       <div
         className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
-          showInfo
-            ? "visible translate-y-0 opacity-100"
-            : "pointer-events-none invisible opacity-0"
+          showInfo ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible opacity-0"
         }`}
       >
         <button
@@ -78,39 +76,38 @@ export default function Navbar({ information, email }: { information: any; email
           </svg>
         </button>
         <div className="px-[36px] pb-[18px] leading-[10px]">
-          <p className="leading-[14px]">{information.statement}</p>
+          <p className="leading-[12px]">{information.statement}</p>
 
-          <div className="mt-[18px]">
-            <div className="grid grid-cols-3 text-[7.5px] text-[#BCBCBC]">
-              <p>Service</p>
-              <p>Clients</p>
-              <p>Press</p>
-            </div>
-            <div className="mt-[6px] grid grid-cols-3">
-              <div className="flex flex-col">
+          <div className="mt-[18px] flex flex-row gap-x-[90px]">
+            <div className="flex flex-col gap-y-[18px]">
+              <div className="flex flex-col leading-[12px]">
+                <p className="text-[#BCBCBC]">Services</p>
                 <p>Brand Positioning</p>
                 <p>Brand Architecture</p>
+                <p>Visual Identity Development</p>
+                <p>Art Direction</p>
+                <p>Print</p>
+                <p>Digital</p>
               </div>
               <div className="flex flex-col">
-                <p>Justsmile</p>
-                <p>Talome</p>
-                <p>Aymeric</p>
-              </div>
-              <div className="flex flex-col">
-                <p>Visuelle</p>
-                <p>Visual Journal</p>
+                <p className="text-[#BCBCBC]">Inquiries</p>
+                <p>studio@ninepointsixthree.com</p>
               </div>
             </div>
-          </div>
 
-          <div className="mt-[18px]">
-            <div className="grid grid-cols-3 text-[7.5px] text-[#BCBCBC]">
-              <p>Email</p>
-              <p>Socials</p>
-            </div>
-            <div className="mt-[6px] grid grid-cols-3">
-              <a href={`mailto:${email}`}>{email}</a>
-              <p>9pt63</p>
+            <div className="flex flex-col gap-y-[18px]">
+              <div className="flex flex-col">
+                <p className="text-[#BCBCBC]">Press & Features</p>
+                <p>Visual Journal</p>
+                <p>Visuelle</p>
+                <p>Contemporary Type</p>
+                <p>Klikkentheke</p>
+              </div>
+              <div className="flex flex-col">
+                <p className="text-[#BCBCBC]">Social</p>
+                <p>Instagram</p>
+                <p>LinkedIn</p>
+              </div>
             </div>
           </div>
         </div>

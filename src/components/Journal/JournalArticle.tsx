@@ -43,7 +43,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
       </header>
 
       {post.excerpt && (
-        <p className="mb-[19px] text-[10px] leading-[12px] text-[#989898]">{post.excerpt}</p>
+        <p className="mb-[14px] text-[10px] leading-[12px] text-[#989898]">{post.excerpt}</p>
       )}
 
       {post.body && (

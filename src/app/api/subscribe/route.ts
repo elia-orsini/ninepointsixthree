@@ -17,7 +17,6 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         email,
-        listIds: [2], // replace with your Brevo list ID
         updateEnabled: true, // if email exists, update it
       }),
     });
