@@ -71,7 +71,7 @@ export default async function RootLayout({
       <body
         className={`no-scrollbar flex flex-col overflow-x-clip bg-[#FAF9F6] text-[10px] ${Helvetica.className} antialiased`}
       >
-        <Navbar information={information[0]} email={information[0].email} />
+        <Navbar information={information[0]} />
 
         <div className="main-content flex min-h-dvh flex-col">
           {children}
