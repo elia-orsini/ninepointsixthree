@@ -27,14 +27,14 @@ export default async function SoundsPage() {
 
   return (
     <main className="flex w-screen flex-col">
-      <div className="mx-auto mt-[90px] lg:mt-[35px] w-[calc(100vw-48px)] sm:w-[624px] h-[252px] animate-fadeUp">
+      <div className="mx-auto mt-[90px] h-[252px] w-[calc(100vw-48px)] animate-fadeUp sm:w-[624px] lg:mt-[35px]">
         <div className="flex flex-col space-y-[18px]">
           {sounds.map((sound) => (
             <article
               key={sound._id}
-              className="flex gap-x-[14px] sm:gap-x-[50px] overflow-hidden rounded-[24px] bg-[#D2D2D2B2] p-[36px] transition-all duration-300"
+              className="flex gap-x-[14px] overflow-hidden rounded-[24px] bg-[#D2D2D2B2] p-[18px] transition-all duration-300 sm:gap-x-[50px]"
             >
-              <div className="flex flex-1 flex-col mt-[14px]">
+              <div className="mt-[14px] flex flex-1 flex-col pl-[18px]">
                 <div>
                   {sound.publishedAt && (
                     <time className="text-[7.5px] leading-[9.5px] text-[#989898]">
@@ -51,7 +51,9 @@ export default async function SoundsPage() {
                   <h2 className="mt-[3px] text-[13.4px] text-[#373737]">{sound.title}</h2>
 
                   {sound.excerpt && (
-                    <p className="mt-[11px] text-[10px] leading-[12px] text-[#373737]">{sound.excerpt}</p>
+                    <p className="mt-[11px] text-[10px] leading-[12px] text-[#373737]">
+                      {sound.excerpt}
+                    </p>
                   )}
                 </div>
 
@@ -70,7 +72,7 @@ export default async function SoundsPage() {
               </div>
 
               {sound.mainImage && (
-                <div className="relative w-[130px] h-[130px] sm:h-[215px] sm:w-[215px] flex-shrink-0 overflow-hidden rounded-[18px]">
+                <div className="relative h-[130px] w-[130px] flex-shrink-0 overflow-hidden rounded-[18px] sm:h-[215px] sm:w-[215px]">
                   <Image
                     src={urlFor(sound.mainImage.asset).height(900).url()}
                     alt={sound.title}
