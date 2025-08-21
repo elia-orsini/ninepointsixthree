@@ -58,14 +58,14 @@ export default async function SoundsPage() {
                 </div>
 
                 {sound.link && (
-                  <div className="mt-[24px]">
+                  <div className="mt-[22px]">
                     <a
                       href={sound.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center rounded-[24px] bg-[#6C6C6CB2] px-[14px] py-[7px] text-[10px] text-[#F8F8F8] transition-colors duration-200"
+                      className="inline-flex w-[74px] items-center rounded-[24px] bg-[#6C6C6CB2] py-[10px] text-center text-[10px] text-[#F8F8F8] transition-colors duration-200"
                     >
-                      Listen
+                      <span className="mx-auto">Listen</span>
                     </a>
                   </div>
                 )}

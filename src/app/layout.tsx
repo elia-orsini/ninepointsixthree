@@ -34,20 +34,22 @@ const Helvetica = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Nine Point Six Three",
-  description: "Nine Point Six Three",
+  title: "9.63",
+  description:
+    "9.63 is a creative studio founded on the belief that every business has a story to tell. Our approach is fueled by a deep sense of curiosity and a passion for discovery. In partnership with forward-thinking cultural and commercial brands, we help uncover their purpose, identify and clarify core values, and develop a foundation for future success. By leveraging tactical intuition, we create brand strategies and identity systems that engage deeply with the world we live in. Ultimately, we seek to produce thoughtful solutions that convey our clients’ brand essence and propel them into the forefront of modern culture.",
   icons: {
     icon: "/globe.svg",
   },
   openGraph: {
-    title: "Nine Point Six Three",
-    description: "Nine Point Six Three",
+    title: "9.63",
+    description:
+      "9.63 is a creative studio founded on the belief that every business has a story to tell. Our approach is fueled by a deep sense of curiosity and a passion for discovery. In partnership with forward-thinking cultural and commercial brands, we help uncover their purpose, identify and clarify core values, and develop a foundation for future success. By leveraging tactical intuition, we create brand strategies and identity systems that engage deeply with the world we live in. Ultimately, we seek to produce thoughtful solutions that convey our clients’ brand essence and propel them into the forefront of modern culture.",
     images: [
       {
         url: "/globe.svg",
         width: 500,
         height: 500,
-        alt: "Nine Point Six Three",
+        alt: "9.63",
       },
     ],
   },
