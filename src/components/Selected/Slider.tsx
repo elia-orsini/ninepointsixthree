@@ -8,23 +8,52 @@ import "swiper/css/free-mode";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 
-export default function Slider({
-  mediaList,
-  showThumbnails = true,
-}: {
-  mediaList: any[];
-  showThumbnails?: boolean;
-}) {
+export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails?: boolean }) {
   const swiperRef = useRef<any>(null);
   const isAnimating = useRef(false);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [scroll, setScroll] = useState(0);
 
   // Handle image load
   const handleImageLoad = (imageKey: string) => {
-    setLoadedImages(prev => new Set(prev).add(imageKey));
+    setLoadedImages((prev) => new Set(prev).add(imageKey));
   };
 
-  // Calculate scale based on viewport position
+  useEffect(() => {
+    const handleScroll = (event: WheelEvent) => {
+      if (swiperRef.current) {
+        event.preventDefault();
+
+        const scrollDelta = event.deltaY;
+
+        setScroll((s) => s + scrollDelta);
+        const newTranslate = swiperRef.current.translate - scrollDelta * 0.5;
+
+        let finalTranslate = newTranslate;
+        if (newTranslate > 0) {
+          finalTranslate = newTranslate;
+        }
+
+        swiperRef.current.setTranslate(finalTranslate);
+        swiperRef.current.update();
+        updateSlideScales();
+
+        if (
+          swiperRef.current.realIndex < 10 ||
+          swiperRef.current.realIndex > duplicatedItems.length - 10
+        ) {
+          swiperRef.current.slideTo(Math.floor(duplicatedItems.length / 2), 0);
+        }
+      }
+    };
+
+    window.addEventListener("wheel", handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, [swiperRef, swiperRef.current, scroll]);
+
   const calculateViewportScale = (element: Element) => {
     const rect = element.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
@@ -46,7 +75,6 @@ export default function Slider({
     return Math.max(1.0, Math.min(1.5, scaleFactor));
   };
 
-  // Update scales for all slides
   const updateSlideScales = useCallback(() => {
     if (!swiperRef.current || isAnimating.current) return;
 
@@ -61,88 +89,41 @@ export default function Slider({
     });
   }, []);
 
-  // Set up scroll and resize listeners
-  useEffect(() => {
-    const handleScroll = () => {
-      requestAnimationFrame(updateSlideScales);
-    };
-
-    const handleResize = () => {
-      requestAnimationFrame(updateSlideScales);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize, { passive: true });
-
-    // Initial update
-    setTimeout(updateSlideScales, 100);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [updateSlideScales]);
-
-  // Handle loop transition
-  const handleTransitionStart = () => {
-    isAnimating.current = true;
-  };
-
-  const handleTransitionEnd = () => {
-    isAnimating.current = false;
-    updateSlideScales();
-  };
-
-  // Clone items for seamless looping (reduced for better performance)
-  const duplicatedItems = [
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-    ...mediaList,
-  ];
+  const duplicatedItems = [...mediaList, ...mediaList, ...mediaList, ...mediaList];
 
   return (
     <div className="h-full w-screen">
-      <div className={`flex h-full w-full ${!showThumbnails && "opacity-0"}`}>
+      <div className={`absolute bottom-0 h-dvh w-full sm:h-screen`}>
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={2}
+          virtualTranslate={false}
           loop={true}
-          loopAdditionalSlides={mediaList.length * 5}
           modules={[FreeMode]}
           freeMode={{
             enabled: true,
-            sticky: true,
+            sticky: false,
           }}
-          allowTouchMove={false}
-          onTransitionStart={handleTransitionStart}
-          onTransitionEnd={handleTransitionEnd}
-          className="no-scrollbar w-screen !overflow-scroll"
+          allowTouchMove={true}
+          className="no-scrollbar !h-dvh !overflow-scroll"
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
-            // Start auto-scrolling
-            const autoScroll = () => {
-              if (!swiper.destroyed) {
-                swiper.slideNext(1000);
-                setTimeout(autoScroll, 3000);
-              }
-            };
-            setTimeout(autoScroll, 3000);
+            const initialTranslate = swiperRef.current.translate;
+            const centerNumber = Math.floor(duplicatedItems.length / 2);
+            const toTranslate = initialTranslate + centerNumber * -140;
+            swiperRef.current.setTranslate(toTranslate);
+            swiperRef.current.update();
           }}
+          centeredSlides={true}
           direction="vertical"
-          speed={1000}
         >
           {duplicatedItems.map((media, index) => {
             const uniqueKey = `${media._key}-${index}`;
             const isImageLoaded = loadedImages.has(media._key);
-            
+            const priority = Math.abs(swiperRef.current?.realIndex - index) < 10;
+
             return (
-              <SwiperSlide
-                key={uniqueKey}
-                data-key={uniqueKey}
-                className="mt-auto flex !h-max select-none"
-              >
+              <SwiperSlide key={uniqueKey} data-key={uniqueKey} className="flex !h-max select-none">
                 <div
                   className={`slide relative mx-auto overflow-hidden rounded-[12px] transition-all duration-300 ease-out`}
                   style={{
@@ -163,8 +144,8 @@ export default function Slider({
                     className={`transition-opacity duration-300 ${
                       isImageLoaded ? "opacity-100" : "opacity-90"
                     }`}
-                    loading={index < 10 ? "eager" : "lazy"}
-                    priority={index < 5}
+                    loading={priority ? "eager" : "lazy"}
+                    priority={priority}
                   />
                 </div>
               </SwiperSlide>
