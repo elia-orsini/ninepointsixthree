@@ -41,11 +41,24 @@ export default {
             backdropFilter: "blur(22px) opacity(1)",
           },
         },
+        emailWidgetDown: {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: "1",
+            backdropFilter: "blur(22px) opacity(1)",
+          },
+          "100%": {
+            transform: "translateY(100px)",
+            opacity: "0",
+            backdropFilter: "blur(0px) opacity(0)",
+          },
+        },
       },
       animation: {
         fadeIn: "fadeIn 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
         fadeUp: "fadeUp 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
         emailWidgetUp: "emailWidgetUp 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
+        emailWidgetDown: "emailWidgetDown 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
       },
     },
   },

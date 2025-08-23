@@ -51,7 +51,7 @@ export default async function SoundsPage() {
                   <h2 className="mt-[3px] text-[13.4px] text-[#373737]">{sound.title}</h2>
 
                   {sound.excerpt && (
-                    <p className="mt-[11px] text-[10px] leading-[12px] text-[#373737]">
+                    <p className="mt-[11px] hidden text-[10px] leading-[12px] text-[#373737] sm:block">
                       {sound.excerpt}
                     </p>
                   )}
