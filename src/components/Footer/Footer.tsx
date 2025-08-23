@@ -137,6 +137,7 @@ export default function Footer() {
 
     if (!email.trim() || !email.includes("@")) {
       setMessage("Please enter a valid email address");
+      setIsSubmitted(false);
       return;
     }
 
@@ -199,7 +200,7 @@ export default function Footer() {
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div
             className={`${getAnimationClass()} ${getPositionClass()} mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
-              isFocused || isSubmitted ? "w-[350px]" : "w-[250px]"
+              isFocused || isSubmitted ? "w-[320px]" : "w-[230px]"
             }`}
           >
             {isSubmitted ? (
@@ -209,7 +210,7 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={`bg-transparent transition-all duration-700 ease-in-out placeholder:text-[10px] placeholder:text-[#A6A6A6] focus:border-none focus:shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0 ${
-                  isFocused || isSubmitted ? "w-[600px]" : "w-[200px]"
+                  isFocused || isSubmitted ? "w-[550px]" : "w-[160px]"
                 }`}
                 style={{ outline: "none", boxShadow: "none" }}
                 placeholder={
