@@ -1,10 +1,12 @@
 "use client";
 
+import useWindowWidth from "@/hooks/useWindowWidth";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 
 export default function Footer() {
   const pathname = usePathname();
+  const width = useWindowWidth();
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -85,7 +87,7 @@ export default function Footer() {
 
   // Scroll-triggered animation for pages where footer is at bottom
   useEffect(() => {
-    if (pathname.includes("journal")) {
+    if (pathname.includes("journal") && width && width > 640) {
       const handleScroll = () => {
         if (hasAnimated || !footerRef.current) return;
 
@@ -166,6 +168,8 @@ export default function Footer() {
   }
 
   const getAnimationClass = () => {
+    if (!pathname.includes("journal") || !width || width <= 640) return "animate-emailWidgetUp";
+
     if (shouldAnimate) return "animate-emailWidgetUp";
     if (isAnimating && animationType === "down") return "animate-emailWidgetDown";
     if (isAnimating && animationType === "up") return "animate-emailWidgetUp";
@@ -178,7 +182,7 @@ export default function Footer() {
       return "translate-y-[100px] opacity-0 backdrop-blur-[0px]";
     }
     // When not visible and not animating, stay hidden
-    if (!isVisible && !isAnimating && pathname.includes("journal")) {
+    if (!isVisible && !isAnimating) {
       return "translate-y-[100px] opacity-0 backdrop-blur-[0px]";
     }
     // Default visible state
@@ -193,7 +197,7 @@ export default function Footer() {
       <div className="mx-auto flex w-[375px] flex-col hover:cursor-pointer">
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div
-            className={`${getAnimationClass()} ${getPositionClass()} mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
+            className={`${getAnimationClass()} ${pathname.includes("journal") && width && width > 640 && getPositionClass()} mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[10px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
               isFocused || isSubmitted ? "w-[320px]" : "w-[230px]"
             }`}
           >
