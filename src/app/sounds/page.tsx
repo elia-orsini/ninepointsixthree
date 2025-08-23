@@ -81,6 +81,7 @@ export default async function SoundsPage() {
                     placeholder="blur"
                     blurDataURL={sound.mainImage.asset.metadata?.lqip}
                     sizes="200px"
+                    unoptimized
                   />
                 </div>
               )}

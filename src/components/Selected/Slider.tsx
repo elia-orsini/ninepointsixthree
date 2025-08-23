@@ -170,6 +170,7 @@ export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails
                     }`}
                     loading={priority ? "eager" : "lazy"}
                     priority={priority}
+                    unoptimized
                   />
                 </div>
               </SwiperSlide>
