@@ -10,7 +10,6 @@ export default function Footer() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -125,7 +124,6 @@ export default function Footer() {
   const handleFocus = () => {
     setIsFocused(true);
     setIsSubmitted(false);
-    setMessage("");
   };
 
   const handleBlur = () => {
@@ -136,13 +134,11 @@ export default function Footer() {
     e.preventDefault();
 
     if (!email.trim() || !email.includes("@")) {
-      setMessage("Please enter a valid email address");
       setIsSubmitted(false);
       return;
     }
 
     setIsLoading(true);
-    setMessage("");
 
     try {
       const res = await fetch("/api/subscribe", {
@@ -159,12 +155,10 @@ export default function Footer() {
         setIsFocused(false);
       } else {
         console.log(data.error);
-        setMessage("Something went wrong");
         setIsSubmitted(false);
       }
     } catch (error) {
       console.log(error);
-      setMessage("Network error. Please try again.");
       setIsSubmitted(false);
     } finally {
       setIsLoading(false);
