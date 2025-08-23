@@ -13,6 +13,7 @@ export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails
   const isAnimating = useRef(false);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [scroll, setScroll] = useState(0);
+  const scaleUpdateTimeout = useRef<NodeJS.Timeout | null>(null);
 
   // Handle image load
   const handleImageLoad = (imageKey: string) => {
@@ -29,14 +30,15 @@ export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails
         setScroll((s) => s + scrollDelta);
         const newTranslate = swiperRef.current.translate - scrollDelta * 0.5;
 
-        let finalTranslate = newTranslate;
-        if (newTranslate > 0) {
-          finalTranslate = newTranslate;
-        }
-
-        swiperRef.current.setTranslate(finalTranslate);
+        swiperRef.current.setTranslate(newTranslate);
         swiperRef.current.update();
-        updateSlideScales();
+
+        if (scaleUpdateTimeout.current) {
+          clearTimeout(scaleUpdateTimeout.current);
+        }
+        scaleUpdateTimeout.current = setTimeout(() => {
+          updateSlideScales();
+        }, 10);
 
         if (
           swiperRef.current.realIndex < 10 ||
@@ -51,6 +53,9 @@ export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
+      if (scaleUpdateTimeout.current) {
+        clearTimeout(scaleUpdateTimeout.current);
+      }
     };
   }, [swiperRef, swiperRef.current, scroll]);
 
@@ -78,15 +83,30 @@ export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails
   const updateSlideScales = useCallback(() => {
     if (!swiperRef.current || isAnimating.current) return;
 
+    const currentIndex = swiperRef.current.realIndex;
     const slides = swiperRef.current.el?.querySelectorAll(".slide");
+    const viewportHeight = window.innerHeight;
 
-    slides.forEach((slide: Element) => {
-      const scale = calculateViewportScale(slide);
-      // @ts-expect-error idk
-      slide.style.width = `${110 * scale}px`;
-      // @ts-expect-error idk
-      slide.style.height = `${138 * scale}px`;
-    });
+    // Define range around current index to update (e.g., ±10 slides)
+    const range = 5;
+    const startIndex = Math.max(0, currentIndex - range);
+    const endIndex = Math.min(slides.length - 1, currentIndex + range);
+
+    for (let i = startIndex; i <= endIndex; i++) {
+      const slide = slides[i];
+      if (!slide) continue;
+
+      const rect = slide.getBoundingClientRect();
+
+      // Check if slide is visible on screen (with some buffer)
+      const isVisible = rect.bottom > -100 && rect.top < viewportHeight + 100;
+
+      if (isVisible) {
+        const scale = calculateViewportScale(slide);
+        slide.style.width = `${110 * scale}px`;
+        slide.style.height = `${138 * scale}px`;
+      }
+    }
   }, []);
 
   const duplicatedItems = [...mediaList, ...mediaList, ...mediaList, ...mediaList];
@@ -113,6 +133,10 @@ export default function Slider({ mediaList }: { mediaList: any[]; showThumbnails
             const toTranslate = initialTranslate + centerNumber * -140;
             swiperRef.current.setTranslate(toTranslate);
             swiperRef.current.update();
+            updateSlideScales();
+          }}
+          onSlideChange={() => {
+            requestAnimationFrame(() => updateSlideScales());
           }}
           centeredSlides={true}
           direction="vertical"
