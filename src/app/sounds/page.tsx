@@ -1,6 +1,7 @@
 import { client } from "@/sanity/client";
 import { fetchOptions } from "@/constants/constants";
 import { urlFor } from "@/sanity/urlFor";
+import { Metadata } from "next";
 import Image from "next/image";
 
 const SOUNDS_QUERY = `*[_type == "sounds"] | order(publishedAt desc) {
@@ -21,6 +22,22 @@ const SOUNDS_QUERY = `*[_type == "sounds"] | order(publishedAt desc) {
     }
   }
 }`;
+
+export const metadata: Metadata = {
+  title: "Sounds | Nine Point Six Three",
+  openGraph: {
+    title: "Sounds | Nine Point Six Three",
+    type: "website",
+    url: "https://www.ninepointsixthree.co/sounds",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sounds | Nine Point Six Three",
+  },
+  alternates: {
+    canonical: "https://www.ninepointsixthree.co/sounds",
+  },
+};
 
 export default async function SoundsPage() {
   const sounds = await client.fetch<any[]>(SOUNDS_QUERY, {}, fetchOptions);

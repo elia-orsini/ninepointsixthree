@@ -1,5 +1,6 @@
 import { client } from "@/sanity/client";
 import JournalArticle from "@/components/Journal/JournalArticle";
+import { Metadata } from "next";
 // import Image from "next/image";
 
 const journalQuery = `*[_type == "journal"] | order(publishedAt desc) {
@@ -41,6 +42,22 @@ interface JournalPost {
   publishedAt: string;
   body: any;
 }
+
+export const metadata: Metadata = {
+  title: "Journal | Nine Point Six Three",
+  openGraph: {
+    title: "Journal | Nine Point Six Three",
+    type: "website",
+    url: "https://www.ninepointsixthree.co/journal",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Journal | Nine Point Six Three",
+  },
+  alternates: {
+    canonical: "https://www.ninepointsixthree.co/journal",
+  },
+};
 
 export default async function JournalPage() {
   const posts: JournalPost[] = await client.fetch(journalQuery);
