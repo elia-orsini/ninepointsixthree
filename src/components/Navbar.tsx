@@ -75,12 +75,12 @@ export default function Navbar({ information }: { information: any }) {
             />
           </svg>
         </button>
-        <div className="px-[36px] pb-[18px] leading-[10px]">
-          <p className="leading-[12px]">{information.statement}</p>
+        <div className="px-[36px] pb-[18px] leading-tight">
+          <p className="leading-tight">{information.statement}</p>
 
           <div className="mt-[18px] flex flex-row gap-x-[90px]">
             <div className="flex flex-col gap-y-[18px]">
-              <div className="flex flex-col leading-[12px]">
+              <div className="flex flex-col leading-tight">
                 <p className="text-[#BCBCBC]">Services</p>
                 <p>Brand Positioning</p>
                 <p>Brand Architecture</p>

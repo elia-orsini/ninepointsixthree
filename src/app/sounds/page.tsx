@@ -37,7 +37,7 @@ export default async function SoundsPage() {
               <div className="mt-[14px] flex flex-1 flex-col pl-[18px]">
                 <div>
                   {sound.publishedAt && (
-                    <time className="text-[7.5px] leading-[9.5px] text-[#989898]">
+                    <time className="leading-tight text-[7.5px] text-[#989898]">
                       {new Date(sound.publishedAt)
                         .toLocaleDateString("en-US", {
                           year: "2-digit",
@@ -51,7 +51,7 @@ export default async function SoundsPage() {
                   <h2 className="mt-[3px] text-[13.4px] text-[#373737]">{sound.title}</h2>
 
                   {sound.excerpt && (
-                    <p className="mt-[11px] hidden text-[10px] leading-[12px] text-[#373737] sm:block">
+                    <p className="text-[11px]auto mt-[11px] hidden text-[#373737] sm:block">
                       {sound.excerpt}
                     </p>
                   )}
@@ -63,7 +63,7 @@ export default async function SoundsPage() {
                       href={sound.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-[74px] items-center rounded-[24px] bg-[#6C6C6CB2] py-[10px] text-center text-[10px] text-[#F8F8F8] transition-colors duration-200"
+                      className="inline-flex w-[74px] items-center rounded-[24px] bg-[#6C6C6CB2] py-[10px] text-center text-[11px] text-[#F8F8F8] transition-colors duration-200"
                     >
                       <span className="mx-auto">Listen</span>
                     </a>

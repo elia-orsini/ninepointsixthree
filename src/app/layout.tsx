@@ -162,7 +162,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#FAF9F6] text-[10px] ${Helvetica.className} antialiased`}
+        className={`no-scrollbar flex flex-col overflow-x-clip bg-[#FAF9F6] text-[11px] ${Helvetica.className} antialiased`}
       >
         <Navbar information={information[0]} />
 
