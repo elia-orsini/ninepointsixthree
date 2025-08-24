@@ -2,6 +2,7 @@ import { client } from "@/sanity/client";
 import JournalArticle from "@/components/Journal/JournalArticle";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/urlFor";
+import { Metadata } from "next";
 
 const journalPostQuery = `*[_type == "journal" && slug.current == $slug][0] {
   _id,
@@ -61,6 +62,57 @@ interface PageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post: JournalPost = await client.fetch(journalPostQuery, { slug });
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The requested journal post could not be found.",
+    };
+  }
+
+  const description = post.excerpt || 
+    `Read "${post.title}" on Nine Point Six Three - ${post.series ? `Part of the ${post.series} series.` : "A journal post about design, creativity, and innovation."}`;
+
+  const imageUrl = post.mainImage 
+    ? urlFor(post.mainImage).width(1200).height(630).url() 
+    : "https://www.ninepointsixthree.co/963-logo-wide.svg";
+
+  return {
+    title: `${post.title} | Nine Point Six Three`,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      type: "article",
+      url: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      publishedTime: post.publishedAt,
+      modifiedTime: post.publishedAt,
+      authors: ["Nine Point Six Three"],
+      section: post.series || "Journal",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
+    },
+  };
 }
 
 export default async function JournalPostPage({ params }: PageProps) {
