@@ -198,7 +198,7 @@ export default function Footer() {
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div
             className={`${getAnimationClass()} ${pathname.includes("journal") && width && width > 640 && getPositionClass()} mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[11px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
-              isFocused || isSubmitted ? "w-[320px]" : "w-[230px]"
+              isFocused || isSubmitted ? "w-[320px]" : "w-[250px]"
             }`}
           >
             {isSubmitted ? (
