@@ -78,7 +78,7 @@ export default function Navbar({ information }: { information: any }) {
         <div className="px-[36px] pb-[18px] leading-tight">
           <p className="leading-tight">{information.statement}</p>
 
-          <div className="mt-[18px] flex flex-row gap-x-[90px]">
+          <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
             <div className="flex flex-col gap-y-[18px]">
               <div className="flex flex-col leading-tight">
                 <p className="text-[#BCBCBC]">Services</p>
@@ -95,7 +95,7 @@ export default function Navbar({ information }: { information: any }) {
               </div>
             </div>
 
-            <div className="flex flex-col gap-y-[18px]">
+            <div className="mt-[18px] flex flex-col gap-y-[18px] sm:mt-0">
               <div className="flex flex-col">
                 <p className="text-[#BCBCBC]">Press & Features</p>
                 <p>Visual Journal</p>
