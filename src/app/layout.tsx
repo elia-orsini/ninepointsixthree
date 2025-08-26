@@ -106,14 +106,20 @@ export const viewport: Viewport = {
   themeColor: "#FAF9F6",
 };
 
-const INFORMATION = `*[_type == "information"][]{statement, instagram, email}`;
+const INFORMATION = `*[_type == "information"][0]{
+  statement,
+  email,
+  services,
+  features,
+  social[]{label, url}
+}`;
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const information = await client.fetch<any[]>(INFORMATION, {}, fetchOptions);
+  const information = await client.fetch<any>(INFORMATION, {}, fetchOptions);
 
   // Organization structured data
   const organizationSchema = {
@@ -137,13 +143,9 @@ export default async function RootLayout({
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: information[0]?.email || "hello@ninepointsixthree.co",
+      email: information?.email || "hello@ninepointsixthree.co",
     },
-    sameAs: [
-      information[0]?.instagram
-        ? `https://instagram.com/${information[0].instagram.replace("@", "")}`
-        : null,
-    ].filter(Boolean),
+    sameAs: (information?.social || []).map((s: { url?: string }) => s?.url).filter(Boolean),
   };
 
   return (
@@ -164,7 +166,7 @@ export default async function RootLayout({
       <body
         className={`no-scrollbar flex flex-col overflow-x-clip bg-[#FAF9F6] text-[11px] ${Helvetica.className} antialiased`}
       >
-        <Navbar information={information[0]} />
+        <Navbar information={information} />
 
         <div className="main-content flex min-h-dvh flex-col">
           {children}

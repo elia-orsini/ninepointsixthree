@@ -36,6 +36,13 @@ export default function Navbar({ information }: { information: any }) {
     document.querySelector(".main-content")?.classList.add("loaded");
   }, []);
 
+  const services: string[] = Array.isArray(information?.services) ? information.services : [];
+  const features: string[] = Array.isArray(information?.features) ? information.features : [];
+  const email: string | undefined = information?.email;
+  const social: Array<{ label?: string; url?: string }> = Array.isArray(information?.social)
+    ? information.social
+    : [];
+
   return (
     <div className="fixed z-40 mt-[34px] flex w-screen flex-row justify-between gap-x-[5px] px-[24px] sm:px-[60px]">
       {showInfo ? (
@@ -76,37 +83,65 @@ export default function Navbar({ information }: { information: any }) {
           </svg>
         </button>
         <div className="px-[36px] pb-[18px] leading-tight">
-          <p className="leading-tight">{information.statement}</p>
+          <p className="leading-tight">{information?.statement}</p>
 
           <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
             <div className="flex flex-col gap-y-[18px]">
               <div className="flex flex-col leading-tight">
                 <p className="text-[#BCBCBC]">Services</p>
-                <p>Brand Positioning</p>
-                <p>Brand Architecture</p>
-                <p>Visual Identity Development</p>
-                <p>Art Direction</p>
-                <p>Print</p>
-                <p>Digital</p>
+                {services.length > 0
+                  ? services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)
+                  : (
+                    <>
+                      <p>Brand Positioning</p>
+                      <p>Brand Architecture</p>
+                      <p>Visual Identity Development</p>
+                      <p>Art Direction</p>
+                      <p>Print</p>
+                      <p>Digital</p>
+                    </>
+                  )}
               </div>
               <div className="flex flex-col">
                 <p className="text-[#BCBCBC]">Inquiries</p>
-                <p>studio@ninepointsixthree.com</p>
+                <p>{email || "studio@ninepointsixthree.com"}</p>
               </div>
             </div>
 
             <div className="mt-[18px] flex flex-col gap-y-[18px] sm:mt-0">
               <div className="flex flex-col">
                 <p className="text-[#BCBCBC]">Press & Features</p>
-                <p>Visual Journal</p>
-                <p>Visuelle</p>
-                <p>Contemporary Type</p>
-                <p>Klikkentheke</p>
+                {features.length > 0
+                  ? features.map((f, idx) => <p key={`feature-${idx}`}>{f}</p>)
+                  : (
+                    <>
+                      <p>Visual Journal</p>
+                      <p>Visuelle</p>
+                      <p>Contemporary Type</p>
+                      <p>Klikkentheke</p>
+                    </>
+                  )}
               </div>
               <div className="flex flex-col">
                 <p className="text-[#BCBCBC]">Social</p>
-                <p>Instagram</p>
-                <p>LinkedIn</p>
+                {social.length > 0
+                  ? social.map((s, idx) => (
+                      <a
+                        key={`social-${idx}`}
+                        href={s?.url || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:opacity-80"
+                      >
+                        {s?.label || s?.url}
+                      </a>
+                    ))
+                  : (
+                    <>
+                      <p>Instagram</p>
+                      <p>LinkedIn</p>
+                    </>
+                  )}
               </div>
             </div>
           </div>
