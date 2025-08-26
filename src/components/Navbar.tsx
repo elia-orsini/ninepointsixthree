@@ -82,12 +82,12 @@ export default function Navbar({ information }: { information: any }) {
             />
           </svg>
         </button>
-        <div className="px-[36px] pb-[18px] leading-tight">
-          <p className="leading-tight">{information?.statement}</p>
+        <div className="px-[36px] pb-[18px] leading-[118%]">
+          <p className="leading-[118%]">{information?.statement}</p>
 
           <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
             <div className="flex flex-col gap-y-[18px]">
-              <div className="flex flex-col leading-tight">
+              <div className="flex flex-col leading-[118%]">
                 <p className="text-[#BCBCBC]">Services</p>
                 {services.length > 0
                   ? services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)

@@ -54,7 +54,7 @@ export default async function SoundsPage() {
               <div className="mt-[14px] flex flex-1 flex-col pl-[18px]">
                 <div>
                   {sound.publishedAt && (
-                    <time className="text-[7.5px] leading-tight text-[#989898]">
+                    <time className="text-[7.5px] leading-[118%] text-[#989898]">
                       {new Date(sound.publishedAt)
                         .toLocaleDateString("en-US", {
                           year: "2-digit",
