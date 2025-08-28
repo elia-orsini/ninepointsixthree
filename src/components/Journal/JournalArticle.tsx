@@ -26,9 +26,9 @@ export default function JournalArticle({ post }: JournalArticleProps) {
     <article className="rounded-[24px] bg-[#D2D2D2B2] px-[36px] pb-[20px] pt-[32px]">
       <header className="mb-[13px]">
         <div className="mb-[7px] flex flex-row gap-x-[18px]">
-          <p className="text-[7.5px] leading-[118%] text-[#989898]">{post.series}</p>
+          <p className="text-[7.5px] leading-[150%] text-[#989898]">{post.series}</p>
 
-          <time className="text-[7.5px] leading-[118%] text-[#989898]">
+          <time className="text-[7.5px] leading-[150%] text-[#989898]">
             {new Date(post.publishedAt)
               .toLocaleDateString("en-US", {
                 year: "2-digit",
@@ -39,15 +39,15 @@ export default function JournalArticle({ post }: JournalArticleProps) {
           </time>
         </div>
 
-        <h2 className="text-[13.4px] leading-[118%] text-[#373737]">{post.title}</h2>
+        <h2 className="text-[13.4px] leading-[150%] text-[#373737]">{post.title}</h2>
       </header>
 
       {post.excerpt && (
-        <p className="mb-[14px] text-[11px] leading-[118%] text-[#989898]">{post.excerpt}</p>
+        <p className="mb-[14px] text-[11px] leading-[150%] text-[#989898]">{post.excerpt}</p>
       )}
 
       {post.body && (
-        <div className="text-[11px] leading-[118%] text-[#373737]">
+        <div className="text-[11px] leading-[150%] text-[#373737]">
           <PortableText
             value={post.body}
             components={{
@@ -98,7 +98,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
                         />
                       </div>
                       {value.caption && (
-                        <p className="mt-[4px] text-left text-[7.5px] leading-[118%] text-[#989898]">
+                        <p className="mt-[4px] text-left text-[7.5px] leading-[150%] text-[#989898]">
                           {value.caption}
                         </p>
                       )}
