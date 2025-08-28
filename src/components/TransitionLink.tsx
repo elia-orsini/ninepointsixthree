@@ -34,6 +34,8 @@ export const TransitionLink = ({ children, href, ...props }: TransitionLinkProps
   const handleTransition = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
 
+    if (pathname === href) return;
+
     const body = document.querySelector(".main-content");
     body?.classList.add("page-transition");
     transitioningRef.current = true;
