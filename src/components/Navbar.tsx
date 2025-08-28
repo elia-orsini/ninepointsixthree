@@ -48,7 +48,7 @@ export default function Navbar({ information }: { information: any }) {
       {showInfo ? (
         <div></div>
       ) : (
-        <div className="drop-shadow-xs flex rounded-[24px] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[5px]">
+        <div className="drop-shadow-xs flex rounded-[24px] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px]">
           <button
             onClick={() => setShowInfo(true)}
             className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showInfo ? "pointer-events-none opacity-0" : "opacity-100"}`}
@@ -59,7 +59,7 @@ export default function Navbar({ information }: { information: any }) {
       )}
 
       <div
-        className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
+        className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
           showInfo ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible opacity-0"
         }`}
       >
@@ -160,7 +160,7 @@ export default function Navbar({ information }: { information: any }) {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`drop-shadow-xs relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-[#373737] no-underline backdrop-blur-[5px] transition-colors duration-500 first:ml-[5px] hover:bg-[#BCBCBCB2] hover:text-[#373737]`}
+            className={`drop-shadow-xs relative z-10 w-[74px] rounded-[24px] bg-[#DBDBDBB2] py-[10px] text-center text-[#373737] no-underline backdrop-blur-[64px] transition-colors duration-500 first:ml-[5px] hover:bg-[#BCBCBCB2] hover:text-[#373737]`}
           >
             <span>{item.name}</span>
           </TransitionLink>

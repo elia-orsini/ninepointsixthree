@@ -186,7 +186,7 @@ export default function Footer() {
       return "translate-y-[100px] opacity-0 backdrop-blur-[0px]";
     }
     // Default visible state
-    return "translate-y-0 opacity-100 backdrop-blur-[22px]";
+    return "translate-y-0 opacity-100 backdrop-blur-[64px]";
   };
 
   return (
