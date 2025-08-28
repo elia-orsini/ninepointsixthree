@@ -23,7 +23,7 @@ interface JournalArticleProps {
 
 export default function JournalArticle({ post }: JournalArticleProps) {
   return (
-    <article className="rounded-[24px] bg-[#D2D2D2B2] px-[36px] pb-[20px] pt-[32px] drop-shadow-md">
+    <article className="rounded-[24px] bg-[#D2D2D2B2] px-[36px] pb-[20px] pt-[32px]">
       <header className="mb-[13px]">
         <div className="mb-[7px] flex flex-row gap-x-[18px]">
           <p className="text-[7.5px] leading-[118%] text-[#989898]">{post.series}</p>

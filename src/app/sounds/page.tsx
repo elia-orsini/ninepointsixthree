@@ -49,7 +49,7 @@ export default async function SoundsPage() {
           {sounds.map((sound) => (
             <article
               key={sound._id}
-              className="flex gap-x-[14px] overflow-hidden rounded-[24px] bg-[#D2D2D2B2] p-[18px] drop-shadow-md transition-all duration-300 sm:gap-x-[50px]"
+              className="flex gap-x-[14px] overflow-hidden rounded-[24px] bg-[#D2D2D2B2] p-[18px] transition-all duration-300 sm:gap-x-[50px]"
             >
               <div className="mt-[14px] flex flex-1 flex-col pl-[18px]">
                 <div>
