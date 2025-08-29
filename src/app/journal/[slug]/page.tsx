@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : "https://www.ninepointsixthree.co/963-logo-wide.svg";
 
   return {
-    title: `${post.title} | Nine Point Six Three`,
+    title: `${post.title}`,
     description,
     openGraph: {
       title: post.title,

@@ -44,15 +44,15 @@ interface JournalPost {
 }
 
 export const metadata: Metadata = {
-  title: "Journal | Nine Point Six Three",
+  title: "Journal",
   openGraph: {
-    title: "Journal | Nine Point Six Three",
+    title: "Journal",
     type: "website",
     url: "https://www.ninepointsixthree.co/journal",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Journal | Nine Point Six Three",
+    title: "Journal",
   },
   alternates: {
     canonical: "https://www.ninepointsixthree.co/journal",

@@ -24,15 +24,15 @@ const SOUNDS_QUERY = `*[_type == "sounds"] | order(publishedAt desc) {
 }`;
 
 export const metadata: Metadata = {
-  title: "Sounds | Nine Point Six Three",
+  title: "Sounds",
   openGraph: {
-    title: "Sounds | Nine Point Six Three",
+    title: "Sounds",
     type: "website",
     url: "https://www.ninepointsixthree.co/sounds",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sounds | Nine Point Six Three",
+    title: "Sounds",
   },
   alternates: {
     canonical: "https://www.ninepointsixthree.co/sounds",
