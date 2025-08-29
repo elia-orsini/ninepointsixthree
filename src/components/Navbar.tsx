@@ -77,6 +77,7 @@ export default function Navbar({ information }: { information: any }) {
             <path
               d="M1.01367 8.76337L5.01462 4.76242M5.01462 4.76242L9.01556 0.761475M5.01462 4.76242L1.01367 0.761475M5.01462 4.76242L9.01556 8.76337"
               stroke="#BCBCBC"
+              strokeWidth="0.75"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
