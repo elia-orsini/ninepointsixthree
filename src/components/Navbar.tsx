@@ -48,7 +48,7 @@ export default function Navbar({ information }: { information: any }) {
       {showInfo ? (
         <div></div>
       ) : (
-        <div className="drop-shadow-xs flex rounded-[24px] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px]">
+        <div className="drop-shadow-xs flex rounded-[24px] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
           <button
             onClick={() => setShowInfo(true)}
             className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showInfo ? "pointer-events-none opacity-0" : "opacity-100"}`}

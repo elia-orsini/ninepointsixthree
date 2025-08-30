@@ -80,7 +80,7 @@ export default async function SoundsPage() {
                       href={sound.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-[74px] items-center rounded-[24px] bg-[#6C6C6CB2] py-[10px] text-center text-[11px] text-[#F8F8F8] transition-colors duration-200 hover:bg-[#BCBCBCB2]"
+                      className="inline-flex w-[74px] items-center rounded-[24px] bg-[#6C6C6CB2] py-[10px] text-center text-[11px] text-[#F8F8F8] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]"
                     >
                       <span className="mx-auto">Listen</span>
                     </a>
