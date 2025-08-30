@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { TransitionLink } from "./TransitionLink";
+import useWindowWidth from "../hooks/useWindowWidth";
+import MobileFooter from "./Footer/MobileFooter";
 
 const navItems = [
   { path: "/", name: "Selected" },
@@ -12,10 +14,23 @@ const navItems = [
 
 export default function Navbar({ information }: { information: any }) {
   const [showInfo, setShowInfo] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const pathname = usePathname() || "/";
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth && windowWidth < 768; // 768px is typical mobile breakpoint
 
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<any>({});
+
+  useEffect(() => {
+    setShowMobileMenu(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setShowMobileMenu(false);
+    }
+  }, [isMobile]);
 
   useLayoutEffect(() => {
     const el = itemRefs.current[pathname];
@@ -51,110 +66,295 @@ export default function Navbar({ information }: { information: any }) {
         <div className="drop-shadow-xs flex rounded-[24px] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
           <button
             onClick={() => setShowInfo(true)}
-            className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showInfo ? "pointer-events-none opacity-0" : "opacity-100"}`}
+            className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showInfo || (isMobile && showMobileMenu) ? "pointer-events-none opacity-0" : "opacity-100"}`}
           >
             9.63
           </button>
         </div>
       )}
 
-      <div
-        className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
-          showInfo ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible opacity-0"
-        }`}
-      >
-        <button
-          onClick={() => setShowInfo(false)}
-          className="px-[18px] pb-[8px] pt-[18px] transition-colors duration-300 hover:opacity-70"
-        >
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+      {isMobile ? (
+        <>
+          <button
+            onClick={() => setShowInfo(false)}
+            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] bg-[#6C6C6C99] p-[12px] text-[#∑œBCBCBC] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
+              showInfo
+                ? "visible translate-y-0 opacity-100"
+                : "pointer-events-none invisible opacity-0"
+            }`}
           >
-            <path
-              d="M1.01367 8.76337L5.01462 4.76242M5.01462 4.76242L9.01556 0.761475M5.01462 4.76242L1.01367 0.761475M5.01462 4.76242L9.01556 8.76337"
-              stroke="#BCBCBC"
-              strokeWidth="0.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-        <div className="px-[36px] pb-[18px] leading-[135%]">
-          <p className="leading-[135%]">{information?.statement}</p>
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="m-auto"
+            >
+              <path
+                d="M1.01367 8.76337L5.01462 4.76242M5.01462 4.76242L9.01556 0.761475M5.01462 4.76242L1.01367 0.761475M5.01462 4.76242L9.01556 8.76337"
+                stroke="#BCBCBC"
+                strokeWidth="0.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
 
-          <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
-            <div className="flex flex-col gap-y-[18px]">
-              <div className="flex flex-col leading-[135%]">
-                <p className="text-[#BCBCBC]">Services</p>
-                {services.length > 0 ? (
-                  services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)
-                ) : (
-                  <>
-                    <p>Brand Positioning</p>
-                    <p>Brand Architecture</p>
-                    <p>Visual Identity Development</p>
-                    <p>Art Direction</p>
-                    <p>Print</p>
-                    <p>Digital</p>
-                  </>
-                )}
-              </div>
-              <div className="flex flex-col">
-                <p className="text-[#BCBCBC]">Inquiries</p>
-                <p>{email || "studio@ninepointsixthree.com"}</p>
+          <div
+            className={`absolute left-0 top-[43px] z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
+              showInfo
+                ? "visible translate-y-0 opacity-100"
+                : "pointer-events-none invisible opacity-0"
+            }`}
+          >
+            <div className="px-[36px] py-[24px] leading-[135%]">
+              <p className="leading-[135%]">{information?.statement}</p>
+
+              <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
+                <div className="flex flex-col gap-y-[18px]">
+                  <div className="flex flex-col leading-[135%]">
+                    <p className="text-[#BCBCBC]">Services</p>
+                    {services.length > 0 ? (
+                      services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)
+                    ) : (
+                      <>
+                        <p>Brand Positioning</p>
+                        <p>Brand Architecture</p>
+                        <p>Visual Identity Development</p>
+                        <p>Art Direction</p>
+                        <p>Print</p>
+                        <p>Digital</p>
+                      </>
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-[#BCBCBC]">Inquiries</p>
+                    <p>{email || "studio@ninepointsixthree.com"}</p>
+                  </div>
+                </div>
+
+                <div className="mt-[18px] flex flex-col gap-y-[18px] sm:mt-0">
+                  <div className={`flex flex-col ${isMobile ? "hidden" : ""}`}>
+                    <p className="text-[#BCBCBC]">Press & Features</p>
+                    {features.length > 0 ? (
+                      features.map((f, idx) => <p key={`feature-${idx}`}>{f}</p>)
+                    ) : (
+                      <>
+                        <p>Visual Journal</p>
+                        <p>Visuelle</p>
+                        <p>Contemporary Type</p>
+                        <p>Klikkentheke</p>
+                      </>
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-[#BCBCBC]">Social</p>
+                    {social.length > 0 ? (
+                      social.map((s, idx) => (
+                        <a
+                          key={`social-${idx}`}
+                          href={s?.url || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:opacity-80"
+                        >
+                          {s?.label || s?.url}
+                        </a>
+                      ))
+                    ) : (
+                      <>
+                        <p>Instagram</p>
+                        <p>LinkedIn</p>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="mt-[18px] flex flex-col gap-y-[18px] sm:mt-0">
-              <div className="flex flex-col">
-                <p className="text-[#BCBCBC]">Press & Features</p>
-                {features.length > 0 ? (
-                  features.map((f, idx) => <p key={`feature-${idx}`}>{f}</p>)
-                ) : (
-                  <>
-                    <p>Visual Journal</p>
-                    <p>Visuelle</p>
-                    <p>Contemporary Type</p>
-                    <p>Klikkentheke</p>
-                  </>
-                )}
+            <MobileFooter />
+          </div>
+        </>
+      ) : (
+        <div
+          className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
+            showInfo
+              ? "visible translate-y-0 opacity-100"
+              : "pointer-events-none invisible opacity-0"
+          }`}
+        >
+          <button
+            onClick={() => setShowInfo(false)}
+            className="px-[18px] pb-[8px] pt-[18px] transition-colors duration-300 hover:opacity-70"
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.01367 8.76337L5.01462 4.76242M5.01462 4.76242L9.01556 0.761475M5.01462 4.76242L1.01367 0.761475M5.01462 4.76242L9.01556 8.76337"
+                stroke="#BCBCBC"
+                strokeWidth="0.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <div className="px-[36px] pb-[18px] leading-[135%]">
+            <p className="leading-[135%]">{information?.statement}</p>
+
+            <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
+              <div className="flex flex-col gap-y-[18px]">
+                <div className="flex flex-col leading-[135%]">
+                  <p className="text-[#BCBCBC]">Services</p>
+                  {services.length > 0 ? (
+                    services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)
+                  ) : (
+                    <>
+                      <p>Brand Positioning</p>
+                      <p>Brand Architecture</p>
+                      <p>Visual Identity Development</p>
+                      <p>Art Direction</p>
+                      <p>Print</p>
+                      <p>Digital</p>
+                    </>
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-[#BCBCBC]">Inquiries</p>
+                  <p>{email || "studio@ninepointsixthree.com"}</p>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <p className="text-[#BCBCBC]">Social</p>
-                {social.length > 0 ? (
-                  social.map((s, idx) => (
-                    <a
-                      key={`social-${idx}`}
-                      href={s?.url || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:opacity-80"
-                    >
-                      {s?.label || s?.url}
-                    </a>
-                  ))
-                ) : (
-                  <>
-                    <p>Instagram</p>
-                    <p>LinkedIn</p>
-                  </>
-                )}
+
+              <div className="mt-[18px] flex flex-col gap-y-[18px] sm:mt-0">
+                <div className={`flex flex-col ${isMobile ? "hidden" : ""}`}>
+                  <p className="text-[#BCBCBC]">Press & Features</p>
+                  {features.length > 0 ? (
+                    features.map((f, idx) => <p key={`feature-${idx}`}>{f}</p>)
+                  ) : (
+                    <>
+                      <p>Visual Journal</p>
+                      <p>Visuelle</p>
+                      <p>Contemporary Type</p>
+                      <p>Klikkentheke</p>
+                    </>
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-[#BCBCBC]">Social</p>
+                  {social.length > 0 ? (
+                    social.map((s, idx) => (
+                      <a
+                        key={`social-${idx}`}
+                        href={s?.url || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:opacity-80"
+                      >
+                        {s?.label || s?.url}
+                      </a>
+                    ))
+                  ) : (
+                    <>
+                      <p>Instagram</p>
+                      <p>LinkedIn</p>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div
         onClick={() => setShowInfo(false)}
-        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[64px]`}
+        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[24px] sm:backdrop-blur-[64px]`}
       ></div>
 
-      <div ref={containerRef} className="relative flex w-max flex-row gap-x-[6px] rounded-[3px]">
+      {isMobile && (
+        <div className="drop-shadow-xs flex rounded-[24px] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
+          <button
+            onClick={() => setShowMobileMenu(true)}
+            className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showMobileMenu ? "pointer-events-none opacity-0" : "opacity-100"}`}
+          >
+            Menu
+          </button>
+        </div>
+      )}
+
+      {isMobile && (
+        <>
+          <div
+            onClick={() => setShowMobileMenu(false)}
+            className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showMobileMenu ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[24px]`}
+          ></div>
+
+          <button
+            onClick={() => setShowMobileMenu(false)}
+            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] bg-[#DBDBDBB2] p-[12px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
+              showMobileMenu
+                ? "visible translate-y-0 opacity-100"
+                : "pointer-events-none invisible opacity-0"
+            }`}
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="m-auto"
+            >
+              <path
+                d="M1.01367 8.76337L5.01462 4.76242M5.01462 4.76242L9.01556 0.761475M5.01462 4.76242L1.01367 0.761475M5.01462 4.76242L9.01556 8.76337"
+                stroke="#BCBCBC"
+                strokeWidth="0.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div
+            className={`absolute right-0 top-[43px] z-50 mr-[24px] w-[118px] rounded-[24px] bg-[#DBDBDBB2] p-[12px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
+              showMobileMenu
+                ? "visible translate-y-0 opacity-100"
+                : "pointer-events-none invisible opacity-0"
+            }`}
+          >
+            <div className="flex flex-col items-center gap-y-[8px]">
+              <button
+                onClick={() => {
+                  setShowInfo(true);
+                  setShowMobileMenu(false);
+                }}
+                className="relative flex h-[33px] w-[94.22px] items-center rounded-[24px] bg-white bg-opacity-80 px-3 text-center text-[#373737] backdrop-blur-[5px] transition-opacity duration-300 hover:opacity-80"
+              >
+                <p className="m-auto">About</p>
+              </button>
+              {navItems.map((item) => (
+                <TransitionLink
+                  key={item.path}
+                  href={item.path}
+                  className="relative flex h-[33px] w-[94.22px] items-center rounded-[24px] bg-white bg-opacity-80 px-3 text-center text-[#373737] no-underline backdrop-blur-[5px] transition-opacity duration-300 hover:opacity-80"
+                >
+                  <p className="m-auto">{item.name}</p>
+                </TransitionLink>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
+      <div
+        ref={containerRef}
+        className={`relative flex w-max flex-row gap-x-[6px] rounded-[3px] ${isMobile ? "hidden" : ""}`}
+      >
         {navItems.map((item) => (
           <TransitionLink
             key={item.path}
