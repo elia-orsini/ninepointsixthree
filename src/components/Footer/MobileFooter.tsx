@@ -1,10 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 
 export default function MobileFooter() {
-  const pathname = usePathname();
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [email, setEmail] = useState("");
@@ -56,8 +54,8 @@ export default function MobileFooter() {
 
   return (
     <div className="relative z-50 -mb-[74px] flex w-full flex-row text-[14px]">
-      <div className="flex flex-col hover:cursor-pointer w-full">
-        <form onSubmit={handleSubmit} className="flex flex-col w-full">
+      <div className="flex w-full flex-col hover:cursor-pointer">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col">
           <div
             className={`mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[11px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
               isFocused || isSubmitted ? "w-full" : "w-full"
