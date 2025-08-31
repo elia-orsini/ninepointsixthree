@@ -51,10 +51,10 @@ export default async function SoundsPage() {
               key={sound._id}
               className="flex gap-x-[14px] overflow-hidden rounded-[24px] bg-[#DBDBDBB2] p-[18px] transition-all duration-300 sm:gap-x-[50px]"
             >
-              <div className="mt-[10px] flex flex-1 flex-col pl-[6px]">
+              <div className="mt-[12px] flex flex-1 flex-col pl-[11px]">
                 <div>
                   {sound.publishedAt && (
-                    <time className="text-[7.5px] leading-[150%] text-[#989898]">
+                    <time className="text-[7.5px] leading-[125%] text-[#989898]">
                       {new Date(sound.publishedAt)
                         .toLocaleDateString("en-US", {
                           year: "2-digit",

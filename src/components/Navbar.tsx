@@ -108,12 +108,12 @@ export default function Navbar({ information }: { information: any }) {
                 : "pointer-events-none invisible opacity-0"
             }`}
           >
-            <div className="px-[36px] py-[24px] leading-[135%]">
-              <p className="leading-[135%]">{information?.statement}</p>
+            <div className="px-[29px] pb-[29px] pt-[24px] leading-[125%]">
+              <p className="leading-[125%]">{information?.statement}</p>
 
               <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
                 <div className="flex flex-col gap-y-[18px]">
-                  <div className="flex flex-col leading-[135%]">
+                  <div className="flex flex-col leading-[125%]">
                     <p className="text-[#BCBCBC]">Services</p>
                     {services.length > 0 ? (
                       services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)
@@ -186,7 +186,7 @@ export default function Navbar({ information }: { information: any }) {
         >
           <button
             onClick={() => setShowInfo(false)}
-            className="px-[18px] pb-[8px] pt-[18px] transition-colors duration-300 hover:opacity-70"
+            className="px-[14px] pb-[8px] pt-[18px] transition-colors duration-300 hover:opacity-70"
           >
             <svg
               width="10"
@@ -204,12 +204,12 @@ export default function Navbar({ information }: { information: any }) {
               />
             </svg>
           </button>
-          <div className="px-[36px] pb-[18px] leading-[135%]">
-            <p className="leading-[135%]">{information?.statement}</p>
+          <div className="px-[33px] pb-[10px] leading-[125%]">
+            <p className="leading-[125%]">{information?.statement}</p>
 
             <div className="mt-[18px] flex flex-col gap-x-[90px] sm:flex-row">
               <div className="flex flex-col gap-y-[18px]">
-                <div className="flex flex-col leading-[135%]">
+                <div className="flex flex-col leading-[125%]">
                   <p className="text-[#BCBCBC]">Services</p>
                   {services.length > 0 ? (
                     services.map((svc, idx) => <p key={`svc-${idx}`}>{svc}</p>)
