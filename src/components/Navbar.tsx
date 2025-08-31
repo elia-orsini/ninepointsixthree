@@ -17,7 +17,7 @@ export default function Navbar({ information }: { information: any }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const pathname = usePathname() || "/";
   const windowWidth = useWindowWidth();
-  const isMobile = windowWidth && windowWidth < 768; // 768px is typical mobile breakpoint
+  const isMobile = windowWidth && windowWidth < 640;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<any>({});

@@ -2,31 +2,22 @@
 
 import Image from "next/image";
 import { urlFor } from "@/sanity/urlFor";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
-import useWindowWidth from "@/hooks/useWindowWidth";
-import MobileSlider from "./MobileSlider";
 
-export default function Slider({
+export default function MobileSlider({
   mediaList,
-  showThumbnails,
 }: {
   mediaList: any[];
   showThumbnails?: boolean;
 }) {
-  const windowWidth = useWindowWidth();
-  const isMobile = windowWidth && windowWidth < 640;
-
-  // All hooks must be called at the top level, regardless of mobile/desktop
   const swiperRef = useRef<any>(null);
-  const isAnimating = useRef(false);
+  const slidesRef = useRef<NodeListOf<HTMLElement> | null>(null);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const scaleUpdateTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  // Handle image load
   const handleImageLoad = (imageKey: string) => {
     setLoadedImages((prev) => new Set(prev).add(imageKey));
   };
@@ -53,24 +44,27 @@ export default function Slider({
   };
 
   const updateSlideScales = useCallback(() => {
-    if (!swiperRef.current || isAnimating.current) return;
+    if (!swiperRef.current) return;
+
+    if (!slidesRef.current) {
+      slidesRef.current = swiperRef.current.el?.querySelectorAll(".slide");
+    }
+
+    if (!slidesRef.current || slidesRef.current.length === 0) return;
 
     const currentIndex = swiperRef.current.realIndex;
-    const slides = swiperRef.current.el?.querySelectorAll(".slide");
     const viewportHeight = window.innerHeight;
 
-    // Define range around current index to update (e.g., ±10 slides)
     const range = 5;
     const startIndex = Math.max(0, currentIndex - range);
-    const endIndex = Math.min(slides.length - 1, currentIndex + range);
+    const endIndex = Math.min(slidesRef.current.length - 1, currentIndex + range);
 
     for (let i = startIndex; i <= endIndex; i++) {
-      const slide = slides[i];
+      const slide = slidesRef.current[i];
       if (!slide) continue;
 
       const rect = slide.getBoundingClientRect();
 
-      // Check if slide is visible on screen (with some buffer)
       const isVisible = rect.bottom > -100 && rect.top < viewportHeight + 100;
 
       if (isVisible) {
@@ -81,84 +75,53 @@ export default function Slider({
     }
   }, []);
 
-  const duplicatedItems = [...mediaList, ...mediaList, ...mediaList, ...mediaList];
+  const duplicatedItems = [...mediaList, ...mediaList, ...mediaList];
 
-  useEffect(() => {
-    // Only add scroll listener for desktop
-    if (isMobile) return;
-
-    const handleScroll = (event: WheelEvent) => {
-      if (swiperRef.current) {
-        event.preventDefault();
-
-        const scrollDelta = event.deltaY;
-
-        const newTranslate = swiperRef.current.translate - scrollDelta * 0.5;
-
-        swiperRef.current.setTranslate(newTranslate);
-        swiperRef.current.update();
-
-        if (scaleUpdateTimeout.current) {
-          clearTimeout(scaleUpdateTimeout.current);
-        }
-        scaleUpdateTimeout.current = setTimeout(() => {
-          updateSlideScales();
-        }, 10);
-
-        if (
-          swiperRef.current.realIndex < 10 ||
-          swiperRef.current.realIndex > duplicatedItems.length - 10
-        ) {
-          swiperRef.current.slideTo(Math.floor(duplicatedItems.length / 2), 0);
-        }
-      }
-    };
-
-    window.addEventListener("wheel", handleScroll, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleScroll);
-      if (scaleUpdateTimeout.current) {
-        clearTimeout(scaleUpdateTimeout.current);
-      }
-    };
-  }, [isMobile, duplicatedItems.length, updateSlideScales]);
-
-  // If mobile, render the mobile-optimized version
-  if (isMobile) {
-    return <MobileSlider mediaList={mediaList} showThumbnails={showThumbnails} />;
-  }
-
-  // Desktop version with manual scroll manipulation
   return (
     <div className="h-full w-screen">
-      <div className={`absolute bottom-0 h-dvh w-full sm:h-screen`}>
+      <div className="absolute bottom-0 h-dvh w-full sm:h-screen">
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={2}
-          virtualTranslate={false}
           loop={true}
           modules={[FreeMode]}
           freeMode={{
             enabled: true,
             sticky: false,
+            momentum: false,
+            momentumRatio: 0,
+            momentumVelocityRatio: 0,
           }}
           allowTouchMove={true}
-          className="no-scrollbar !h-dvh !overflow-scroll"
+          className="no-scrollbar !h-full !overflow-scroll"
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
-            const initialTranslate = swiperRef.current.translate;
             const centerNumber = Math.floor(duplicatedItems.length / 2);
-            const toTranslate = initialTranslate + centerNumber * -140;
-            swiperRef.current.setTranslate(toTranslate);
-            swiperRef.current.update();
-            updateSlideScales();
+            swiper.slideTo(centerNumber, 0);
+            setTimeout(() => {
+              slidesRef.current = null;
+              updateSlideScales();
+            }, 100);
           }}
           onSlideChange={() => {
-            requestAnimationFrame(() => updateSlideScales());
+            if (swiperRef.current && swiperRef.current.el) {
+              requestAnimationFrame(() => updateSlideScales());
+            }
           }}
           centeredSlides={true}
           direction="vertical"
+          speed={400}
+          touchRatio={1}
+          touchAngle={45}
+          grabCursor={true}
+          resistance={true}
+          resistanceRatio={0.85}
+          effect="slide"
+          followFinger={true}
+          shortSwipes={true}
+          longSwipes={true}
+          longSwipesRatio={0.5}
+          longSwipesMs={300}
         >
           {duplicatedItems.map((media, index) => {
             const uniqueKey = `${media._key}-${index}`;
@@ -168,7 +131,7 @@ export default function Slider({
             return (
               <SwiperSlide key={uniqueKey} data-key={uniqueKey} className="flex !h-max select-none">
                 <div
-                  className={`slide relative mx-auto overflow-hidden rounded-[12px] transition-all duration-300 ease-out`}
+                  className="slide relative mx-auto overflow-hidden rounded-[12px] transition-all duration-300 ease-out"
                   style={{
                     transformOrigin: "center center",
                     height: "138px",
