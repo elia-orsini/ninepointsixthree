@@ -56,7 +56,7 @@ export default function Slider({
     if (!swiperRef.current || isAnimating.current) return;
 
     const currentIndex = swiperRef.current.realIndex;
-    const slides = swiperRef.current.el?.querySelectorAll(".slide");
+    const slides = swiperRef.current.el?.querySelectorAll(".slide") || [];
     const viewportHeight = window.innerHeight;
 
     // Define range around current index to update (e.g., ±10 slides)
