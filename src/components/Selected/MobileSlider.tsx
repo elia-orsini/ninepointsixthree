@@ -55,7 +55,7 @@ export default function MobileSlider({
       const isVisible = rect.bottom > -100 && rect.top < viewportHeight + 100;
 
       if (isVisible) {
-        const scale = calculateViewportScale(imageContainer, scrollTop);
+        const scale = calculateViewportScale(imageContainer);
         (imageContainer as HTMLElement).style.width = `${110 * scale}px`;
         (imageContainer as HTMLElement).style.height = `${138 * scale}px`;
 
