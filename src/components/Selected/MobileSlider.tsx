@@ -32,13 +32,13 @@ export default function MobileSlider({
     const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
 
     // Maximum distance where scaling should occur (half viewport height)
-    const maxDistance = viewportHeight / 3;
+    const maxDistance = viewportHeight / 4;
 
     // Calculate scale factor: 1.0 at edges, 1.5 at center
     const scaleFactor = 1.0 + 0.5 * (1 - distanceFromCenter / maxDistance);
 
     // Clamp scale between 1.0 and 1.5
-    return Math.max(1.0, Math.min(1.5, scaleFactor));
+    return Math.max(1.0, Math.min(1.4, scaleFactor));
   };
 
   const updateImageScales = () => {
