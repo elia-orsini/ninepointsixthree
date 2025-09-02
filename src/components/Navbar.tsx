@@ -77,7 +77,7 @@ export default function Navbar({ information }: { information: any }) {
         <>
           <button
             onClick={() => setShowInfo(false)}
-            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] bg-[#6C6C6C99] p-[12px] text-[#∑œBCBCBC] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
+            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] bg-[#6C6C6C99] p-[12px] text-[#BCBCBC] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
               showInfo
                 ? "visible translate-y-0 opacity-100"
                 : "pointer-events-none invisible opacity-0"
@@ -273,7 +273,7 @@ export default function Navbar({ information }: { information: any }) {
 
       <div
         onClick={() => setShowInfo(false)}
-        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[24px] sm:backdrop-blur-[64px]`}
+        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[24px] bg-black/20 sm:backdrop-blur-[64px]`}
       ></div>
 
       {isMobile && (
@@ -291,7 +291,7 @@ export default function Navbar({ information }: { information: any }) {
         <>
           <div
             onClick={() => setShowMobileMenu(false)}
-            className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showMobileMenu ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[24px]`}
+            className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showMobileMenu ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-black/20 backdrop-blur-[24px]`}
           ></div>
 
           <button
