@@ -181,7 +181,7 @@ export default function MobileSlider({
           msOverflowStyle: "none", // IE/Edge
         }}
       >
-        <div ref={containerRef} className="flex flex-col items-center gap-2 py-[50vh]">
+        <div ref={containerRef} className="flex flex-col items-center gap-[2px] py-[50vh]">
           {repeatedMediaList.map((media, index) => {
             const isImageLoaded = loadedImages.has(media._key);
             const priority = index < 5; // Load first 5 images eagerly
