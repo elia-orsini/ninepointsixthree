@@ -130,7 +130,7 @@ export default function Navbar({ information }: { information: any }) {
                   </div>
                   <div className="flex flex-col">
                     <p className="text-[#BCBCBC]">Inquiries</p>
-                    <p>{email || "studio@ninepointsixthree.com"}</p>
+                    <a href={`mailto:${email || "studio@ninepointsixthree.com"}`}>Email</a>
                   </div>
                 </div>
 
@@ -226,7 +226,7 @@ export default function Navbar({ information }: { information: any }) {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-[#BCBCBC]">Inquiries</p>
-                  <p>{email || "studio@ninepointsixthree.com"}</p>
+                  <a href={`mailto:${email || "studio@ninepointsixthree.com"}`}>Email</a>
                 </div>
               </div>
 
@@ -273,7 +273,7 @@ export default function Navbar({ information }: { information: any }) {
 
       <div
         onClick={() => setShowInfo(false)}
-        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-transparent backdrop-blur-[24px] bg-black/20 sm:backdrop-blur-[64px]`}
+        className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-black/20 bg-transparent backdrop-blur-[24px] sm:backdrop-blur-[64px]`}
       ></div>
 
       {isMobile && (
