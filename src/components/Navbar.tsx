@@ -63,7 +63,7 @@ export default function Navbar({ information }: { information: any }) {
       {showInfo ? (
         <div></div>
       ) : (
-        <div className="drop-shadow-xs flex rounded-[24px] border border-white bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
+        <div className="drop-shadow-xs flex rounded-[24px] border !border-[#F9F9F9] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
           <button
             onClick={() => setShowInfo(true)}
             className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showInfo || (isMobile && showMobileMenu) ? "pointer-events-none opacity-0" : "opacity-100"}`}
@@ -277,7 +277,7 @@ export default function Navbar({ information }: { information: any }) {
       ></div>
 
       {isMobile && (
-        <div className="drop-shadow-xs flex rounded-[24px] border border-white bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
+        <div className="drop-shadow-xs flex rounded-[24px] border !border-[#F9F9F9] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
           <button
             onClick={() => setShowMobileMenu(true)}
             className={`m-auto px-[24px] py-[10px] transition-all duration-300 ${showMobileMenu ? "pointer-events-none opacity-0" : "opacity-100"}`}
@@ -333,7 +333,7 @@ export default function Navbar({ information }: { information: any }) {
                   setShowInfo(true);
                   setShowMobileMenu(false);
                 }}
-                className="relative flex h-[33px] w-[94.22px] items-center rounded-[24px] border border-white bg-white bg-opacity-80 px-3 text-center text-[#373737] backdrop-blur-[5px] transition-opacity duration-300 hover:opacity-80"
+                className="relative flex h-[33px] w-[94.22px] items-center rounded-[24px] border !border-[#F9F9F9] bg-white bg-opacity-80 px-3 text-center text-[#373737] backdrop-blur-[5px] transition-opacity duration-300 hover:opacity-80"
               >
                 <p className="m-auto">About</p>
               </button>
@@ -341,7 +341,7 @@ export default function Navbar({ information }: { information: any }) {
                 <TransitionLink
                   key={item.path}
                   href={item.path}
-                  className="relative flex h-[33px] w-[94.22px] items-center rounded-[24px] border border-white bg-white bg-opacity-80 px-3 text-center text-[#373737] no-underline backdrop-blur-[5px] transition-opacity duration-300 hover:opacity-80"
+                  className="relative flex h-[33px] w-[94.22px] items-center rounded-[24px] border !border-[#F9F9F9] bg-white bg-opacity-80 px-3 text-center text-[#373737] no-underline backdrop-blur-[5px] transition-opacity duration-300 hover:opacity-80"
                 >
                   <p className="m-auto">{item.name}</p>
                 </TransitionLink>
@@ -361,7 +361,7 @@ export default function Navbar({ information }: { information: any }) {
             href={item.path}
             //@ts-expect-error idk
             ref={(el) => (itemRefs.current[item.path] = el)}
-            className={`drop-shadow-xs relative z-10 w-[74px] rounded-[24px] border border-white bg-[#DBDBDBB2] py-[10px] text-center text-[#373737] no-underline backdrop-blur-[64px] transition-colors duration-500 first:ml-[5px] hover:bg-[#BCBCBCB2] hover:text-[#373737]`}
+            className={`drop-shadow-xs relative z-10 w-[74px] rounded-[24px] border !border-[#F9F9F9] bg-[#DBDBDBB2] py-[10px] text-center text-[#373737] no-underline backdrop-blur-[64px] transition-colors duration-500 first:ml-[5px] hover:bg-[#BCBCBCB2] hover:text-[#373737]`}
           >
             <span>{item.name}</span>
           </TransitionLink>
