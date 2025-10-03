@@ -77,7 +77,7 @@ export default function Navbar({ information }: { information: any }) {
         <>
           <button
             onClick={() => setShowInfo(false)}
-            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] bg-[#6C6C6C99] p-[12px] text-[#BCBCBC] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
+            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] border-[0.5px] border-[#BCBCBCB2] bg-[#6C6C6C99] p-[12px] text-[#BCBCBC] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
               showInfo
                 ? "visible translate-y-0 opacity-100"
                 : "pointer-events-none invisible opacity-0"
@@ -102,7 +102,7 @@ export default function Navbar({ information }: { information: any }) {
           </button>
 
           <div
-            className={`absolute left-0 top-[43px] z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
+            className={`absolute left-0 top-[43px] z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] border-[0.5px] border-[#BCBCBCB2] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[22px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
               showInfo
                 ? "visible translate-y-0 opacity-100"
                 : "pointer-events-none invisible opacity-0"
@@ -178,7 +178,7 @@ export default function Navbar({ information }: { information: any }) {
         </>
       ) : (
         <div
-          className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
+          className={`absolute left-0 top-0 z-50 ml-[24px] w-[calc(100vw-48px)] rounded-[24px] border-[0.5px] border-[#BCBCBCB2] bg-[#6C6C6CB2] pb-[18px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out md:ml-[60px] md:w-[670px] ${
             showInfo
               ? "visible translate-y-0 opacity-100"
               : "pointer-events-none invisible opacity-0"
@@ -296,7 +296,7 @@ export default function Navbar({ information }: { information: any }) {
 
           <button
             onClick={() => setShowMobileMenu(false)}
-            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] bg-[#DBDBDBB2] p-[12px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
+            className={`absolute right-0 top-0 z-50 mr-[24px] w-[49px] rounded-[24px] border-[0.5px] border-[#BCBCBCB2] bg-[#DBDBDBB2] p-[12px] text-[#f8f8f8] backdrop-blur-[64px] transition-all duration-500 ease-in-out ${
               showMobileMenu
                 ? "visible translate-y-0 opacity-100"
                 : "pointer-events-none invisible opacity-0"

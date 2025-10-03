@@ -57,7 +57,7 @@ export default function MobileFooter() {
       <div className="flex w-full flex-col hover:cursor-pointer">
         <form onSubmit={handleSubmit} className="flex w-full flex-col">
           <div
-            className={`mx-auto flex flex-row justify-between rounded-[24px] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[11px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
+            className={`mx-auto flex flex-row justify-between rounded-[24px] border-[0.5px] border-[#BCBCBCB2] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[11px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
               isFocused || isSubmitted ? "w-full" : "w-full"
             }`}
           >
