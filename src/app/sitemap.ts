@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
+
 import { client } from "@/sanity/client";
+import { fetchOptions } from "@/constants/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Query all journal slugs
@@ -8,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     publishedAt
   }`;
 
-  const journalPosts = await client.fetch(journalQuery);
+  const journalPosts = await client.fetch(journalQuery, {}, fetchOptions);
 
   const journalPages = journalPosts.map(
     (post: { slug: { current: string }; publishedAt: string }) => {

@@ -3,6 +3,7 @@ import JournalArticle from "@/components/Journal/JournalArticle";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/urlFor";
 import { Metadata } from "next";
+import { fetchOptions } from "@/constants/constants";
 
 const journalPostQuery = `*[_type == "journal" && slug.current == $slug][0] {
   _id,
@@ -38,7 +39,7 @@ export async function generateStaticParams() {
     slug
   }`;
 
-  const posts = await client.fetch(query);
+  const posts = await client.fetch(query, {}, fetchOptions);
 
   return posts.map((post: { slug: { current: string } }) => ({
     slug: post.slug.current,
@@ -66,7 +67,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post: JournalPost = await client.fetch(journalPostQuery, { slug });
+  const post: JournalPost = await client.fetch(journalPostQuery, { slug }, fetchOptions);
 
   if (!post) {
     return {
@@ -117,7 +118,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function JournalPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post: JournalPost = await client.fetch(journalPostQuery, { slug });
+  const post: JournalPost = await client.fetch(journalPostQuery, { slug }, fetchOptions);
 
   if (!post) {
     notFound();

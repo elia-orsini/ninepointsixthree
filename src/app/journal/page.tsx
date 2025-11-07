@@ -1,6 +1,7 @@
 import { client } from "@/sanity/client";
 import JournalArticle from "@/components/Journal/JournalArticle";
 import { Metadata } from "next";
+import { fetchOptions } from "@/constants/constants";
 // import Image from "next/image";
 
 const journalQuery = `*[_type == "journal"] | order(publishedAt desc) {
@@ -60,7 +61,7 @@ export const metadata: Metadata = {
 };
 
 export default async function JournalPage() {
-  const posts: JournalPost[] = await client.fetch(journalQuery);
+  const posts: JournalPost[] = await client.fetch(journalQuery, {}, fetchOptions);
 
   return (
     <main className="min-h-screen">
