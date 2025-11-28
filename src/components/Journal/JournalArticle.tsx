@@ -85,7 +85,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
                       <div className="relative w-full" style={{ aspectRatio: aspectRatio }}>
                         <Image
                           src={imageUrl}
-                          alt={value.alt || value.title || "Image"}
+                          alt={value.caption || value.title || post.title}
                           fill
                           className="object-contain"
                           placeholder="blur"

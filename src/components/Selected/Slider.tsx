@@ -179,7 +179,7 @@ export default function Slider({
                     src={urlFor(media.asset).height(700).url()}
                     fill
                     style={{ objectFit: "cover" }}
-                    alt=""
+                    alt={media.caption || media.title || "9.63 Selected Works"}
                     sizes="700px"
                     placeholder="blur"
                     blurDataURL={media.metadata?.lqip}

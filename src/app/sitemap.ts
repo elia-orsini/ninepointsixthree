@@ -8,7 +8,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Query all journal slugs
   const journalQuery = `*[_type == "journal"] | order(publishedAt desc) {
     slug,
-    publishedAt
+    publishedAt,
+    mainImage,
+    body[]{
+      _type,
+      _type == "image" => {
+        asset
+      }
+    }
   }`;
 
   const journalPosts = await client.fetch(journalQuery, {}, fetchOptions);
@@ -37,12 +44,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((url: string | null) => url !== null) as string[];
 
   const journalPages = journalPosts.map(
-    (post: { slug: { current: string }; publishedAt: string }) => {
+    (post: { slug: { current: string }; publishedAt: string; mainImage: any; body?: any[] }) => {
+      const imageUrls: string[] = [];
+
+      // Add mainImage if it exists
+      if (post.mainImage) {
+        try {
+          const mainImageUrl = urlFor(post.mainImage).width(1200).height(630).url().split("?")[0];
+          if (mainImageUrl) imageUrls.push(mainImageUrl);
+        } catch {}
+      }
+
+      // Extract images from body blocks
+      if (post.body && Array.isArray(post.body)) {
+        post.body.forEach((block: any) => {
+          if (block._type === "image" && block.asset) {
+            try {
+              const imageUrl = urlFor(block.asset).url()?.split("?")[0];
+              if (imageUrl && !imageUrls.includes(imageUrl)) {
+                imageUrls.push(imageUrl);
+              }
+            } catch {}
+          }
+        });
+      }
+
       return {
         url: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
         lastModified: new Date(post.publishedAt),
         changeFrequency: "monthly" as const,
         priority: 0.8,
+        images: imageUrls,
       };
     }
   );
