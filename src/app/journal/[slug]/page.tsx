@@ -76,21 +76,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const description = post.excerpt || 
-    `Read "${post.title}" on Nine Point Six Three - ${post.series ? `Part of the ${post.series} series.` : "A journal post about design, creativity, and innovation."}`;
+  const description = post.excerpt || post.title;
 
-  const imageUrl = post.mainImage 
-    ? urlFor(post.mainImage).width(1200).height(630).url() 
+  const imageUrl = post.mainImage
+    ? urlFor(post.mainImage).width(1200).height(630).url()
     : "https://www.ninepointsixthree.co/963-logo-wide.svg";
 
   return {
-    title: `${post.title}`,
+    title: `${post.title} | Nine Point Six Three`,
     description,
     openGraph: {
-      title: post.title,
+      title: `${post.title} | Nine Point Six Three`,
       description,
       type: "article",
       url: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
+      siteName: "Nine Point Six Three",
       images: [
         {
           url: imageUrl,
@@ -106,7 +106,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
+      title: `${post.title} | Nine Point Six Three`,
       description,
       images: [imageUrl],
     },
@@ -128,31 +128,31 @@ export default async function JournalPostPage({ params }: PageProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": post.title,
-    "description": post.excerpt || post.title,
-    "image": post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined,
-    "datePublished": post.publishedAt,
-    "dateModified": post.publishedAt,
-    "author": {
+    headline: post.title,
+    description: post.excerpt || post.title,
+    image: post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: {
       "@type": "Organization",
-      "name": "Nine Point Six Three",
-      "url": "https://www.ninepointsixthree.co"
+      name: "Nine Point Six Three",
+      url: "https://www.ninepointsixthree.co",
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Nine Point Six Three",
-      "logo": {
+      name: "Nine Point Six Three",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://www.ninepointsixthree.co/963-logo.svg"
-      }
+        url: "https://www.ninepointsixthree.co/963-logo.svg",
+      },
     },
-    "mainEntityOfPage": {
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://www.ninepointsixthree.co/journal/${post.slug.current}`
+      "@id": `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
     },
-    "url": `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
-    "articleSection": post.series || "Journal",
-    "wordCount": post.body ? JSON.stringify(post.body).length : undefined,
+    url: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
+    articleSection: post.series || "Journal",
+    wordCount: post.body ? JSON.stringify(post.body).length : undefined,
   };
 
   return (
