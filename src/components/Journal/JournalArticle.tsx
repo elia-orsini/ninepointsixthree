@@ -53,7 +53,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
           {post.tags.map((tag: { name: string }) => (
             <p
               key={tag.name}
-              className="w-max cursor-default border-[0.65px] border-[#8E8E8E] px-[6.5px] py-[4px] text-[7.5px] leading-[125%] text-[#8E8E8E] transition-all duration-[400ms] odd:rounded-[6.6px] even:rounded-[1.6px] hover:bg-[#8E8E8EB2] hover:text-white"
+              className="w-max cursor-default border-[0.65px] border-[#8E8E8E] px-[6.5px] py-[4px] text-[7.5px] leading-[125%] text-[#8E8E8E] transition-all duration-[400ms] odd:rounded-full even:rounded-[1.6px] hover:bg-[#8E8E8EB2] hover:text-white"
             >
               {tag.name}
             </p>
