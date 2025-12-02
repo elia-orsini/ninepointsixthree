@@ -31,7 +31,8 @@ const journalPostQuery = `*[_type == "journal" && slug.current == $slug][0] {
     }
   },
   excerpt,
-  series,
+  series[]->{name},
+  tags[]->{name}
 }`;
 
 export async function generateStaticParams() {
@@ -56,7 +57,8 @@ interface JournalPost {
   publishedAt: string;
   body: any;
   excerpt?: string;
-  series?: string;
+  series?: { name: string }[];
+  tags?: { name: string }[];
 }
 
 interface PageProps {
@@ -102,7 +104,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       publishedTime: post.publishedAt,
       modifiedTime: post.publishedAt,
       authors: ["Nine Point Six Three"],
-      section: post.series || "Journal",
+      section: post.series?.map((series: { name: string }) => series.name).join(", ") || "Journal",
     },
     twitter: {
       card: "summary_large_image",

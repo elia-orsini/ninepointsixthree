@@ -29,8 +29,8 @@ const journalQuery = `*[_type == "journal"] | order(publishedAt desc) {
       }
     }
   },
-  excerpt,
-  series
+  series[]->{name},
+  tags[]->{name}
 }`;
 
 interface JournalPost {

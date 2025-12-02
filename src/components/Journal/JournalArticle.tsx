@@ -12,7 +12,8 @@ interface JournalPost {
   publishedAt: string;
   body: any;
   excerpt?: string;
-  series?: string;
+  series?: { name: string }[];
+  tags?: { name: string }[];
 }
 
 interface JournalArticleProps {
@@ -22,13 +23,18 @@ interface JournalArticleProps {
 }
 
 export default function JournalArticle({ post }: JournalArticleProps) {
+  console.log(post);
   return (
     <article className="rounded-[24px] bg-[#DBDBDBB2] px-[29px] pb-[19px] pt-[30px]">
       <header className="mb-[13px]">
         <div className="mb-[7px] flex flex-row gap-x-[18px]">
-          <p className="text-[7.5px] leading-[125%] text-[#989898]">{post.series}</p>
+          {post.series && (
+            <p className="text-[7.5px] leading-[125%] text-[#8E8E8E]">
+              {post.series.map((series: { name: string }) => series.name).join(", ")}
+            </p>
+          )}
 
-          <time className="text-[7.5px] leading-[125%] text-[#989898]">
+          <time className="text-[7.5px] leading-[125%] text-[#8E8E8E]">
             {new Date(post.publishedAt)
               .toLocaleDateString("en-US", {
                 year: "2-digit",
@@ -42,8 +48,17 @@ export default function JournalArticle({ post }: JournalArticleProps) {
         <h2 className="text-[13.4px] leading-[125%] text-[#373737]">{post.title}</h2>
       </header>
 
-      {post.excerpt && (
-        <p className="mb-[14px] text-[11px] leading-[125%] text-[#989898]">{post.excerpt}</p>
+      {post.tags && (
+        <div className="mb-[16px] flex flex-row gap-x-[4px]">
+          {post.tags.map((tag: { name: string }) => (
+            <p
+              key={tag.name}
+              className="w-max cursor-default rounded-[6.6px] border-[0.65px] border-[#8E8E8E] px-[6.5px] py-[4px] text-[7.5px] leading-[125%] text-[#8E8E8E] transition-all duration-[600ms] hover:rounded-[1.6px]"
+            >
+              {tag.name}
+            </p>
+          ))}
+        </div>
       )}
 
       {post.body && (

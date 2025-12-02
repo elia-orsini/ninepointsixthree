@@ -194,7 +194,7 @@ export default function Footer() {
       ref={footerRef}
       className={`fixed bottom-[24px] z-20 mt-auto flex w-full flex-row text-[14px]`}
     >
-      <div className="mx-auto flex w-[375px] flex-col hover:cursor-pointer">
+      <div className="mx-auto flex w-[375px] flex-col">
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div
             className={`${getAnimationClass()} ${pathname.includes("journal") && width && width > 640 && getPositionClass()} mx-auto flex flex-row justify-between rounded-[24px] border-[0.5px] border-[#BCBCBCB2] ${isSubmitted ? "bg-[#6C6C6C80]" : "bg-[#DBDBDB99]"} h-[46px] px-[30px] text-[11px] ${isSubmitted ? "text-[#F8F8F8]" : "text-[#A6A6A6]"} transition-all duration-500 ease-in-out ${
