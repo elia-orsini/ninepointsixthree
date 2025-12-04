@@ -29,7 +29,6 @@ const journalQuery = `*[_type == "journal"] | order(publishedAt desc) {
       }
     }
   },
-  series[]->{name},
   tags[]->{name}
 }`;
 

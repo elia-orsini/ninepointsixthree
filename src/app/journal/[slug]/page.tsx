@@ -31,7 +31,6 @@ const journalPostQuery = `*[_type == "journal" && slug.current == $slug][0] {
     }
   },
   excerpt,
-  series[]->{name},
   tags[]->{name}
 }`;
 
@@ -57,7 +56,6 @@ interface JournalPost {
   publishedAt: string;
   body: any;
   excerpt?: string;
-  series?: { name: string }[];
   tags?: { name: string }[];
 }
 
@@ -104,7 +102,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       publishedTime: post.publishedAt,
       modifiedTime: post.publishedAt,
       authors: ["Nine Point Six Three"],
-      section: post.series?.map((series: { name: string }) => series.name).join(", ") || "Journal",
+      section: "9.63 Journal",
     },
     twitter: {
       card: "summary_large_image",
@@ -153,7 +151,7 @@ export default async function JournalPostPage({ params }: PageProps) {
       "@id": `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
     },
     url: `https://www.ninepointsixthree.co/journal/${post.slug.current}`,
-    articleSection: post.series || "Journal",
+    articleSection: "9.63 Journal",
     wordCount: post.body ? JSON.stringify(post.body).length : undefined,
   };
 

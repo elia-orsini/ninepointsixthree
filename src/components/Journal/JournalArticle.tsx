@@ -12,7 +12,6 @@ interface JournalPost {
   publishedAt: string;
   body: any;
   excerpt?: string;
-  series?: { name: string }[];
   tags?: { name: string }[];
 }
 
@@ -28,12 +27,6 @@ export default function JournalArticle({ post }: JournalArticleProps) {
     <article className="rounded-[24px] bg-[#DBDBDBB2] px-[29px] pb-[19px] pt-[30px]">
       <header className="mb-[13px]">
         <div className="mb-[7px] flex flex-row gap-x-[18px]">
-          {post.series && (
-            <p className="text-[7.5px] leading-[125%] text-[#8E8E8E]">
-              {post.series.map((series: { name: string }) => series.name).join(", ")}
-            </p>
-          )}
-
           <time className="text-[7.5px] leading-[125%] text-[#8E8E8E]">
             {new Date(post.publishedAt)
               .toLocaleDateString("en-US", {
