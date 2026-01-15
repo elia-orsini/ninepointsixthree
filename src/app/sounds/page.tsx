@@ -89,12 +89,12 @@ export default async function SoundsPage() {
                   )}
 
                   {sound.curationInfo && (
-                    <div className="mt-[16px] hidden text-[10px] leading-[125%] text-[#373737] sm:block">
+                    <div className="mt-[16px] hidden text-[10px] text-[#373737] sm:block">
                       <PortableText
                         value={sound.curationInfo}
                         components={{
                           block: {
-                            normal: ({ children }) => <p className="mb-[14px]">{children}</p>,
+                            normal: ({ children }) => <p>{children}</p>,
                           },
                           marks: {
                             link: ({ value, children }: any) => (
