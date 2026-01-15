@@ -3,6 +3,7 @@ import { fetchOptions } from "@/constants/constants";
 import { urlFor } from "@/sanity/urlFor";
 import { Metadata } from "next";
 import Image from "next/image";
+import { PortableText } from "@portabletext/react";
 
 const SOUNDS_QUERY = `*[_type == "sounds"] | order(publishedAt desc) {
   _id,
@@ -18,6 +19,18 @@ const SOUNDS_QUERY = `*[_type == "sounds"] | order(publishedAt desc) {
         lqip,
         blurhash,
         palette
+      }
+    }
+  },
+  curationInfo[]{
+    ...,
+    _type == "image" => {
+      ...,
+      "metadata": {
+        "lqip": asset->metadata.lqip,
+        "blurhash": asset->metadata.blurhash,
+        "palette": asset->metadata.palette,
+        "dimensions": asset->metadata.dimensions
       }
     }
   },
@@ -54,18 +67,6 @@ export default async function SoundsPage() {
             >
               <div className="mt-[12px] flex flex-1 flex-col pl-[11px]">
                 <div>
-                  {/* {sound.publishedAt && (
-                    <time className="text-[7.5px] leading-[125%] text-[#989898]">
-                      {new Date(sound.publishedAt)
-                        .toLocaleDateString("en-US", {
-                          year: "2-digit",
-                          month: "2-digit",
-                          day: "2-digit",
-                        })
-                        .replace(/\//g, "-")}
-                    </time>
-                  )} */}
-
                   <h2 className="mt-[3px] text-[13.4px] text-[#373737]">{sound.title}</h2>
 
                   {sound.tags && (
@@ -82,14 +83,51 @@ export default async function SoundsPage() {
                   )}
 
                   {sound.excerpt && (
-                    <p className="text-[11px]auto mt-[11px] hidden text-[#373737] sm:block">
+                    <p className="auto hidden text-[10px] text-[#373737] sm:block">
                       {sound.excerpt}
                     </p>
+                  )}
+
+                  {sound.curationInfo && (
+                    <div className="mt-[16px] hidden text-[10px] leading-[125%] text-[#373737] sm:block">
+                      <PortableText
+                        value={sound.curationInfo}
+                        components={{
+                          block: {
+                            normal: ({ children }) => <p className="mb-[14px]">{children}</p>,
+                          },
+                          marks: {
+                            link: ({ value, children }: any) => (
+                              <a
+                                href={value?.href}
+                                className="inline-flex items-center gap-x-1 text-[#8E8E8E]"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {children}
+                                <svg
+                                  width="8"
+                                  height="8"
+                                  viewBox="0 0 8 8"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M0 6.37598V2.37695C0 1.61562 0.618223 1.00293 1.37402 1.00293H2.87402C3.08113 1.00293 3.24902 1.17082 3.24902 1.37793C3.24887 1.58491 3.08104 1.75293 2.87402 1.75293H1.37402C1.03062 1.75293 0.75 2.03165 0.75 2.37695V6.37598C0.75 6.71938 1.02872 7 1.37402 7H5.37305C5.71645 7 5.99707 6.72128 5.99707 6.37598V4.87598C5.99707 4.66896 6.16509 4.50113 6.37207 4.50098C6.57918 4.50098 6.74707 4.66887 6.74707 4.87598V6.37598C6.74707 7.13731 6.12885 7.75 5.37305 7.75H1.37402C0.612694 7.75 0 7.13178 0 6.37598ZM7.75 2.625C7.75 2.83211 7.58211 3 7.375 3C7.16789 3 7 2.83211 7 2.625V1.28027L4.88867 3.3916C4.74223 3.53805 4.50485 3.53805 4.3584 3.3916C4.21195 3.24515 4.21195 3.00777 4.3584 2.86133L6.46875 0.75H5.125C4.91789 0.75 4.75 0.582107 4.75 0.375C4.75 0.167893 4.91789 0 5.125 0H7.375C7.58211 0 7.75 0.167893 7.75 0.375V2.625Z"
+                                    fill="#8E8E8E"
+                                  />
+                                </svg>
+                              </a>
+                            ),
+                          },
+                        }}
+                      />
+                    </div>
                   )}
                 </div>
 
                 {sound.link && (
-                  <div className="mt-[22px]">
+                  <div className="mt-[24px]">
                     <a
                       href={sound.link}
                       target="_blank"
