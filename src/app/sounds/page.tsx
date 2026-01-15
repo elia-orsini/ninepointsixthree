@@ -100,7 +100,7 @@ export default async function SoundsPage() {
                             link: ({ value, children }: any) => (
                               <a
                                 href={value?.href}
-                                className="inline-flex items-center gap-x-1 text-[#8E8E8E]"
+                                className="inline-flex items-center gap-x-1 text-[#8E8E8E] underline"
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
