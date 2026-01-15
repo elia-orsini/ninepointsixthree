@@ -276,7 +276,7 @@ export default function Navbar({ information }: { information: any }) {
         className={`fixed left-0 top-0 z-20 h-full w-full transition-all duration-500 ease-in-out ${showInfo ? "visible opacity-100" : "pointer-events-none invisible opacity-0"} bg-black/20 bg-transparent backdrop-blur-[24px] sm:backdrop-blur-[64px]`}
       ></div>
 
-      {isMobile && (
+      {isMobile ? (
         <div className="drop-shadow-xs flex rounded-[24px] border-[0.5px] border-[#BCBCBCB2] bg-[#DBDBDBB2] text-[#373737] backdrop-blur-[64px] transition-colors duration-500 hover:bg-[#BCBCBCB2] hover:text-[#373737]">
           <button
             onClick={() => setShowMobileMenu(true)}
@@ -285,9 +285,9 @@ export default function Navbar({ information }: { information: any }) {
             Menu
           </button>
         </div>
-      )}
+      ) : null}
 
-      {isMobile && (
+      {isMobile ? (
         <>
           <div
             onClick={() => setShowMobileMenu(false)}
@@ -349,7 +349,7 @@ export default function Navbar({ information }: { information: any }) {
             </div>
           </div>
         </>
-      )}
+      ) : null}
 
       <div
         ref={containerRef}
