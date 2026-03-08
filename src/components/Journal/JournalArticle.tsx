@@ -1,6 +1,7 @@
 import { urlFor } from "@/sanity/urlFor";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
+import { ExternalLink } from "@/components/ExternalLink";
 
 interface JournalPost {
   _id: string;
@@ -73,14 +74,7 @@ export default function JournalArticle({ post }: JournalArticleProps) {
               listItem: ({ children }) => <li className="">{children}</li>,
               marks: {
                 link: ({ value, children }: any) => (
-                  <a
-                    href={value?.href}
-                    className="text-[#989898]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {children}
-                  </a>
+                  <ExternalLink href={value?.href ?? "#"}>{children}</ExternalLink>
                 ),
               },
               types: {
