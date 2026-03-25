@@ -30,7 +30,7 @@ export function ExternalLink({ href, children, className = "" }: ExternalLinkPro
       rel="noopener noreferrer"
       className={`inline-flex items-center gap-x-0.5 text-[#8E8E8E] underline ${className}`.trim()}
     >
-      {children}
+      {children} 
       <ExternalLinkIcon />
     </a>
   );
