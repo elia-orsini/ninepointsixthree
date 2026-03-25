@@ -28,7 +28,7 @@ export function ExternalLink({ href, children, className = "" }: ExternalLinkPro
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-x-1 text-[#8E8E8E] underline ${className}`.trim()}
+      className={`inline-flex items-center gap-x-0.5 text-[#8E8E8E] underline ${className}`.trim()}
     >
       {children}
       <ExternalLinkIcon />
